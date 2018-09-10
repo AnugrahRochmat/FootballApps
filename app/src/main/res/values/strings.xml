@@ -2,7 +2,8 @@
     <string name="app_name">Football Match Schedule</string>
     <string name="home_team">Home Team</string>
     <string name="away_team">Away Team</string>
-    <string name="match_scores">- : -</string>
+    <string name="match_scores">\u0020 - : -</string>
+    <string name="match_scores2"> - : -</string>
     <string name="match_detail">Match Detail</string>
     <string name="home_scores">34\':Kevin-Prince Boateng\n38\':Pol Lirola\n41\':Khouma Babacar\n45\':Khouma Babacar\n62\':Gian Marco Ferrari</string>
     <string name="away_scores">31\':Rogerio\n33\':Giangiacomo Magnani\n90\':Alfred Duncan\n</string>
@@ -12,4 +13,10 @@
     <string name="subs">Substitutes</string>
     <string name="yellow">Yellow Cards</string>
     <string name="red">Red Cards</string>
+    <string name="last_match">Last Match</string>
+    <string name="next_match">Next Match</string>
+    <string name="blank_scores">\u0020%1$s : %2$s</string>
+    <string name="blank_scores2">%1$s : %2$s</string>
+    <string name="blank">\u0020%1$s</string>
+    <string name="empty">\u0020</string>
 </resources>

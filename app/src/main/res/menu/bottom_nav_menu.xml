@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/btn_last_match"
+        android:enabled="true"
+        android:icon="@drawable/round_arrow_back_ios_black_18dp"
+        android:title="@string/last_match"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/btn_next_match"
+        android:enabled="true"
+        android:icon="@drawable/round_arrow_forward_ios_black_18dp"
+        android:title="@string/next_match"
+        app:showAsAction="ifRoom" />
+</menu>

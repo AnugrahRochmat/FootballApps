@@ -24,27 +24,62 @@ class MatchDetailActivity : AppCompatActivity() {
 
         val match: MatchSchedule = intent.getSerializableExtra("match") as MatchSchedule
 
+        // Team Header
         tv_home_team_name.text = match.homeTeamName
         tv_away_team_name.text = match.awayTeamName
         getHomeTeamBadge(match.homeTeamName)
         getAwayTeamBadge(match.awayTeamName)
-        tv_match_scores.text = "${match.homeTeamScore} : ${match.awayTeamScore}"
 
+        // Match Score
+        val matchScore = String.format(ctx.getString(R.string.blank_scores2), match.homeTeamScore, match.awayTeamScore)
+        if (!matchScore.contains("null")) {
+            tv_match_scores.text = matchScore
+        } else {
+            tv_match_scores.text = ctx.getString(R.string.match_scores2)
+        }
+
+        // Goals Details
         tv_home_scores.text = match.homeTeamGoalDetail?.replace(";", "\n")
         tv_away_scores.text = match.awayTeamGoalDetail?.replace(";", "\n")
 
+        // Yellow Cards & Red Cards
         tv_home_yellow.text = match.homeTeamYellowCards?.replace(";", "\n")
         tv_away_yellow.text = match.awayTeamYellowCards?.replace(";", "\n")
         tv_home_red.text = match.homeTeamRedCards?.replace(";", "\n")
         tv_away_red.text = match.awayTeamRedCards?.replace(";", "\n")
 
-        var homeLineups: String = match.homeTeamLineupGK + match.homeTeamLineupDef + match.homeTeamLineupMid + match.homeTeamLineupFw
-        var awayLineups: String = match.awayTeamLineupGK + match.awayTeamLineupDef + match.awayTeamLineupMid + match.awayTeamLineupFw
-        tv_home_lineup.text = " ${homeLineups?.replace(";", "\n")}"
-        tv_away_lineup.text = " ${awayLineups?.replace(";", "\n")}"
+        // Home Lineups
+        val homeLineups: String = match.homeTeamLineupGK + match.homeTeamLineupDef + match.homeTeamLineupMid + match.homeTeamLineupFw
+        if (!homeLineups.contains("null")){
+            tv_home_lineup.text = String.format(ctx.getString(R.string.blank), homeLineups.replace(";", "\n"))
+        } else {
+            tv_home_lineup.text = ctx.getString(R.string.empty)
+        }
 
-        tv_home_subs.text = " ${match.homeTeamLineupSubs?.replace(";", "\n")}"
-        tv_away_subs.text = " ${match.awayTeamLineupSubs?.replace(";", "\n")}"
+        // Home Subs
+        val homeSubs = String.format(ctx.getString(R.string.blank), match.homeTeamLineupSubs?.replace(";", "\n"))
+        if (!homeSubs.contains("null")){
+            tv_home_subs.text = homeSubs
+        } else {
+            tv_home_subs.text = ctx.getString(R.string.empty)
+        }
+
+        // Away Lineups
+        val awayLineups: String = match.awayTeamLineupGK + match.awayTeamLineupDef + match.awayTeamLineupMid + match.awayTeamLineupFw
+        if (!awayLineups.contains("null")){
+            tv_away_lineup.text = String.format(ctx.getString(R.string.blank), awayLineups.replace(";", "\n"))
+        } else {
+            tv_away_lineup.text = ctx.getString(R.string.empty)
+        }
+
+        // Away Subs
+        val awaySubs = String.format(ctx.getString(R.string.blank), match.awayTeamLineupSubs?.replace(";", "\n"))
+        if (!awaySubs.contains("null")){
+            tv_away_subs.text = awaySubs
+        } else {
+            tv_away_subs.text = ctx.getString(R.string.empty)
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
