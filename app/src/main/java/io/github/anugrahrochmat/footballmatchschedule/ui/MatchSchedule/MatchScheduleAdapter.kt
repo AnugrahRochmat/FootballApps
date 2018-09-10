@@ -72,7 +72,10 @@ class MatchScheduleUI : AnkoComponent<ViewGroup> {
                     imageView {
                         id = imgHomeTeamID
 //                        setImageResource(R.drawable.img_acm)
-                    }.lparams(dip(40), dip(40))
+                    }.lparams(dip(40), dip(40)){
+                        leftMargin = dip(5)
+                        rightMargin = dip(5)
+                    }
                 }
 
                 // Match Scores
@@ -93,7 +96,10 @@ class MatchScheduleUI : AnkoComponent<ViewGroup> {
                     imageView {
                         id = imgAwayTeamID
 //                        setImageResource(R.drawable.img_acm)
-                    }.lparams(dip(40), dip(40))
+                    }.lparams(dip(40), dip(40)){
+                        leftMargin = dip(5)
+                        rightMargin = dip(5)
+                    }
 
                     textView {
                         id = tvAwayTeamID
@@ -125,7 +131,14 @@ class MatchScheduleViewHolder(override val containerView: View): RecyclerView.Vi
     fun bindItem(matches: MatchSchedule, listener: (MatchSchedule) -> Unit){
         tvHomeTeam.text = matches.homeTeamName
         tvAwayTeam.text = matches.awayTeamName
-        tvMatchScores.text = " ${matches.homeTeamScore} : ${matches.awayTeamScore}"
+
+        val matchScore = String.format(containerView.context.getString(R.string.blank_scores), matches.homeTeamScore, matches.awayTeamScore)
+        if (!matchScore.contains("null")) {
+            tvMatchScores.text = matchScore
+        } else {
+            tvMatchScores.text = containerView.context.getString(R.string.match_scores)
+        }
+
         getHomeTeamBadge(matches.homeTeamName)
         getAwayTeamBadge(matches.awayTeamName)
 
