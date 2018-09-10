@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MatchDetail.MatchDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_padding_8dp">
+        <!--Match Scores-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/img_home_team"
+                    android:layout_width="@dimen/team_badge_dimen"
+                    android:layout_height="@dimen/team_badge_dimen" />
+                <TextView
+                    android:id="@+id/tv_home_team_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_team"
+                    android:paddingTop="@dimen/margin_padding_10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_match_scores"
+                android:layout_width="@dimen/match_scores_width"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_25sp"
+                android:text="@string/match_scores"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/img_away_team"
+                    android:layout_width="@dimen/team_badge_dimen"
+                    android:layout_height="@dimen/team_badge_dimen" />
+                <TextView
+                    android:id="@+id/tv_away_team_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/away_team"
+                    android:paddingTop="@dimen/margin_padding_10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Goals Details-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/margin_padding_8dp">
+            <TextView
+                android:id="@+id/tv_home_scores"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/home_scores"/>
+            <View
+                android:layout_width="@dimen/line_separator_width"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/tv_away_scores"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/away_scores"/>
+        </LinearLayout>
+
+        <!-- Yellow Cards-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_padding_8dp"
+            android:text="@string/yellow"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_home_yellow"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/home_lineup"/>
+            <View
+                android:layout_width="@dimen/line_separator_width"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/tv_away_yellow"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/away_lineup"/>
+        </LinearLayout>
+
+        <!-- Red Cards-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_padding_8dp"
+            android:text="@string/red"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_home_red"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/home_lineup"/>
+            <View
+                android:layout_width="@dimen/line_separator_width"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/tv_away_red"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/away_lineup"/>
+        </LinearLayout>
+
+        <!-- Lineups-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_padding_8dp"
+            android:text="@string/lineups"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_home_lineup"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/home_lineup"/>
+            <View
+                android:layout_width="@dimen/line_separator_width"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/tv_away_lineup"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/away_lineup"/>
+        </LinearLayout>
+
+        <!-- Substitutes-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_padding_8dp"
+            android:text="@string/subs"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_home_subs"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/home_lineup"/>
+            <View
+                android:layout_width="@dimen/line_separator_width"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/tv_away_subs"
+                android:layout_width="@dimen/team_detail_width"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_12sp"
+                android:text="@string/away_lineup"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

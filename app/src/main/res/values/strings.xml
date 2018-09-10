@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Football Match Schedule</string>
+    <string name="home_team">Home Team</string>
+    <string name="away_team">Away Team</string>
+    <string name="match_scores">- : -</string>
+    <string name="match_detail">Match Detail</string>
+    <string name="home_scores">34\':Kevin-Prince Boateng\n38\':Pol Lirola\n41\':Khouma Babacar\n45\':Khouma Babacar\n62\':Gian Marco Ferrari</string>
+    <string name="away_scores">31\':Rogerio\n33\':Giangiacomo Magnani\n90\':Alfred Duncan\n</string>
+    <string name="lineups">Line-ups</string>
+    <string name="home_lineup">Stefano Sorrentino\nFabio Depaoli\n Nenad Tomovic\n Luca Rossettini\n Federico Barba\nNicola Rigoni\n Ivan Radovanovic\n Joel Chukwuma Obi\nValter Birsa\n Mariusz Stepinski\n Emanuele Giaccherini\n</string>
+    <string name="away_lineup">Pietro Terracciano\nGiovanni Di Lorenzo\n Matias Silvestre\n Domenico Maietta\n Luca Antonelli\nRade Krunic\n Leonardo Capezzi\n Afriyie Acquah\n Miha Zajc\nFrancesco Caputo\n Antonino La Gumina\n</string>
+    <string name="subs">Substitutes</string>
+    <string name="yellow">Yellow Cards</string>
+    <string name="red">Red Cards</string>
+</resources>

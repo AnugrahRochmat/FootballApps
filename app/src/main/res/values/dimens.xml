@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_10sp">10sp</dimen>
+    <dimen name="team_badge_dimen">80dp</dimen>
+    <dimen name="margin_padding_10dp">10dp</dimen>
+    <dimen name="margin_padding_8dp">8dp</dimen>
+    <dimen name="team_detail_width">150dp</dimen>
+    <dimen name="match_scores_width">50dp</dimen>
+    <dimen name="text_size_20sp">20sp</dimen>
+    <dimen name="text_size_25sp">25sp</dimen>
+    <dimen name="line_separator_width">20dp</dimen>
+    <dimen name="text_size_12sp">12sp</dimen>
+</resources>
