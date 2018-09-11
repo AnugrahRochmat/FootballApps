@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.data.model
+package io.github.anugrahrochmat.footballmatchschedule.data.models
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

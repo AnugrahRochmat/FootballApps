@@ -1,7 +1,7 @@
 package io.github.anugrahrochmat.footballmatchschedule.data.api
 
-import io.github.anugrahrochmat.footballmatchschedule.data.model.MatchScheduleResponse
-import io.github.anugrahrochmat.footballmatchschedule.data.model.TeamResponse
+import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchScheduleResponse
+import io.github.anugrahrochmat.footballmatchschedule.data.models.TeamResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

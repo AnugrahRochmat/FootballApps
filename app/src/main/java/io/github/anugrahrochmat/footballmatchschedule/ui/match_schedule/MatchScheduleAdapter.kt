@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiClient
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
-import io.github.anugrahrochmat.footballmatchschedule.data.model.MatchSchedule
+import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.extensions.LayoutContainer

@@ -7,7 +7,7 @@ import android.util.Log
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiClient
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
-import io.github.anugrahrochmat.footballmatchschedule.data.model.MatchSchedule
+import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import io.github.anugrahrochmat.footballmatchschedule.ui.match_detail.MatchDetailActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

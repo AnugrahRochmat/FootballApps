@@ -19,4 +19,5 @@
     <string name="blank_scores2">%1$s : %2$s</string>
     <string name="blank">\u0020%1$s</string>
     <string name="empty">\u0020</string>
+    <string name="favourites">Favourites</string>
 </resources>
