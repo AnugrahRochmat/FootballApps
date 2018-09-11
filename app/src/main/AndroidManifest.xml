@@ -12,14 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.MatchSchedule.MatchScheduleActivity">
+        <activity android:name=".ui.match_schedule.MatchScheduleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MatchDetail.MatchDetailActivity"></activity>
+        <activity android:name=".ui.match_detail.MatchDetailActivity"></activity>
     </application>
 
 </manifest>

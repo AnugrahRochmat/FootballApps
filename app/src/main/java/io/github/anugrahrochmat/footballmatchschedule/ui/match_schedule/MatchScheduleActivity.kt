@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.MatchSchedule
+package io.github.anugrahrochmat.footballmatchschedule.ui.match_schedule
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,7 +8,7 @@ import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiClient
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
 import io.github.anugrahrochmat.footballmatchschedule.data.model.MatchSchedule
-import io.github.anugrahrochmat.footballmatchschedule.ui.MatchDetail.MatchDetailActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.match_detail.MatchDetailActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_match_schedule.*
