@@ -79,7 +79,6 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
                     "homeTeamName" to it.homeTeamName,
                     "awayTeamName" to it.awayTeamName)
         }
-//        adapter.notifyDataSetChanged()
     }
 
     override fun showLoading(){
