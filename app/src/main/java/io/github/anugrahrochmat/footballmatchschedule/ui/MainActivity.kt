@@ -30,6 +30,16 @@ class MainActivity : AppCompatActivity() {
             true
         }
         bottom_navigation.selectedItemId = btn_last_match
+
+        /**
+         * Stetho
+         */
+//        // Create an InitializerBuilder
+//        val initializerBuilder = Stetho.newInitializerBuilder(this)
+//        // Enable Chrome DevTools
+//        initializerBuilder.enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+//        // Initialize Stetho with the Initializer
+//        Stetho.initialize(initializerBuilder.build())
     }
 
     private fun loadMatchScheduleFragment(savedInstanceState: Bundle?, matchState: String) {
@@ -45,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_container, MatchFavouritesFragment(), MatchFavouritesFragment::class.java.simpleName)
+                    .replace(R.id.main_container, MatchFavouritesFragment.newInstance(), MatchFavouritesFragment::class.java.simpleName)
                     .commit()
         }
     }

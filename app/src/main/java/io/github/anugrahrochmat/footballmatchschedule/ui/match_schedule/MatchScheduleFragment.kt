@@ -17,7 +17,6 @@ import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 
 class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Context> {
-
     private lateinit var presenter: MatchSchedulePresenter
     private lateinit var adapter: MatchScheduleAdapter
     private lateinit var rvMatchSchedule: RecyclerView
@@ -70,7 +69,9 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
 
     override fun showMatchSchedule(matches: List<MatchSchedule>){
         rvMatchSchedule.adapter = MatchScheduleAdapter(matches){
-            startActivity<MatchDetailActivity>("match" to it)
+            startActivity<MatchDetailActivity>("match" to it.matchId,
+                                                        "homeTeamName" to it.homeTeamName,
+                                                        "awayTeamName" to it.awayTeamName)
         }
         adapter.notifyDataSetChanged()
     }

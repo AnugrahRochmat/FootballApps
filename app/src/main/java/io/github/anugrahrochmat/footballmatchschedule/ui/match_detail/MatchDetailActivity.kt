@@ -1,18 +1,40 @@
 package io.github.anugrahrochmat.footballmatchschedule.ui.match_detail
 
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.squareup.picasso.Picasso
 import io.github.anugrahrochmat.footballmatchschedule.R
+import io.github.anugrahrochmat.footballmatchschedule.R.drawable.ic_round_favorite_24px
+import io.github.anugrahrochmat.footballmatchschedule.R.drawable.ic_round_favorite_border_24px
+import io.github.anugrahrochmat.footballmatchschedule.R.id.add_favourite
 import io.github.anugrahrochmat.footballmatchschedule.R.layout.activity_match_detail
+import io.github.anugrahrochmat.footballmatchschedule.R.menu.detail_menu
+import io.github.anugrahrochmat.footballmatchschedule.data.database.database
+import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     private lateinit var presenter: MatchDetailPresenter
+    private lateinit var match: MatchSchedule
+    private lateinit var urlHomeTeamBadge: String
+    private lateinit var urlAwayTeamBadge: String
+    private lateinit var matchId: String
+    private lateinit var homeTeamName: String
+    private lateinit var awayTeamName: String
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,20 +42,96 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = ctx.getString(R.string.match_detail)
 
-        val match: MatchSchedule = intent.getSerializableExtra("match") as MatchSchedule
+        matchId = intent.getSerializableExtra("match").toString()
+        homeTeamName = intent.getSerializableExtra("homeTeamName").toString()
+        awayTeamName = intent.getSerializableExtra("awayTeamName").toString()
 
+        favouriteState()
         presenter = MatchDetailPresenter(this)
-        presenter.getTeamBadges(match.homeTeamName, match.awayTeamName)
-        presenter.loadTeamDetail(match)
+        presenter.getMatchDetail(matchId)
+        presenter.getTeamBadges(homeTeamName, awayTeamName)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return if (item?.itemId == android.R.id.home) {
-            finish()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(detail_menu, menu)
+        menuItem = menu
+        setFavourite()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            add_favourite -> {
+                if (isFavorite) {
+                    removeFromFavourite()
+                } else {
+                    addFavourite()
+                }
+                isFavorite = !isFavorite
+                setFavourite()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun favouriteState(){
+        database.use {
+            val result = select(Favourite.TABLE_FAVOURITE).whereArgs("(MATCH_ID = {id})", "id" to matchId)
+            val favourite = result.parseList(classParser<Favourite>())
+            if (!favourite.isEmpty()) isFavorite = true
+        }
+    }
+
+    private fun setFavourite() {
+        if (isFavorite) {
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_round_favorite_24px)
+        }
+        else {
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_round_favorite_border_24px)
+        }
+    }
+
+    private fun removeFromFavourite(){
+        try {
+            database.use {
+                delete(Favourite.TABLE_FAVOURITE, "(MATCH_ID = {id})", "id" to matchId)
+            }
+            Snackbar.make(window.decorView.rootView, ctx.getString(R.string.favourite_removed), Snackbar.LENGTH_LONG).show()
+        } catch (e: SQLiteConstraintException) {
+            Snackbar.make(window.decorView.rootView, e.localizedMessage, Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    private fun addFavourite(){
+        try {
+            database.use {
+                insert(Favourite.TABLE_FAVOURITE,
+                        Favourite.MATCH_ID to match.matchId,
+                        Favourite.HOME_TEAM_NAME to match.homeTeamName,
+                        Favourite.HOME_TEAM_SCORE to match.homeTeamScore,
+                        Favourite.HOME_TEAM_BADGE to urlHomeTeamBadge,
+                        Favourite.AWAY_TEAM_NAME to match.awayTeamName,
+                        Favourite.AWAY_TEAM_SCORE to match.awayTeamScore,
+                        Favourite.AWAY_TEAM_BADGE to urlAwayTeamBadge)
+            }
+            Snackbar.make(window.decorView.rootView, ctx.getString(R.string.favourite_added), Snackbar.LENGTH_LONG).show()
+        } catch (e: SQLiteConstraintException) {
+            Snackbar.make(window.decorView.rootView, e.localizedMessage, Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    override fun showMatchDetail(match: MatchSchedule){
+        this.match = match
+        showHeader(match)
+        showGoals(match)
+        showCards(match)
+        showLineups(match)
+        showSubs(match)
     }
 
     override fun showHeader(match: MatchSchedule){
@@ -100,11 +198,13 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         }
     }
 
-    override fun loadHomeBadge(urlHomeTeamBadge: String?){
+    override fun loadHomeBadge(urlHomeTeamBadge: String){
+        this.urlHomeTeamBadge = urlHomeTeamBadge
         Picasso.get().load(urlHomeTeamBadge).into(img_home_team)
     }
 
-    override fun loadAwayBadge(urlAwayTeamBadge: String?){
+    override fun loadAwayBadge(urlAwayTeamBadge: String){
+        this.urlAwayTeamBadge = urlAwayTeamBadge
         Picasso.get().load(urlAwayTeamBadge).into(img_away_team)
     }
 

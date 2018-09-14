@@ -20,4 +20,8 @@
     <string name="blank">\u0020%1$s</string>
     <string name="empty">\u0020</string>
     <string name="favourites">Favourites</string>
+    <string name="favourite_added">Favourite has been added.</string>
+    <string name="favourite_remove">Favourite has been removed.</string>
+    <string name="table_empty">You haven\'t saved your favourites matches.</string>
+    <string name="favourite_removed">Favourite has been removed.</string>
 </resources>
