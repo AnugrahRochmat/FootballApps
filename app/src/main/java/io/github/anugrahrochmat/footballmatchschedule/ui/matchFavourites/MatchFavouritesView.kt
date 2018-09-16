@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.match_favourites
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchFavourites
 
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 

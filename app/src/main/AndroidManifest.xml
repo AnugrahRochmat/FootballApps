@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.match_schedule.MatchScheduleActivity">
+        <activity android:name=".ui.matchSchedule.MatchScheduleActivity">
 
         </activity>
 
-        <activity android:name=".ui.match_detail.MatchDetailActivity" />
+        <activity android:name=".ui.matchDetail.MatchDetailActivity" />
 
         <activity android:name=".ui.MainActivity">
             <intent-filter>

@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.R.id.*
 import io.github.anugrahrochmat.footballmatchschedule.R.layout.activity_main
-import io.github.anugrahrochmat.footballmatchschedule.ui.match_favourites.MatchFavouritesFragment
-import io.github.anugrahrochmat.footballmatchschedule.ui.match_schedule.MatchScheduleFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matchFavourites.MatchFavouritesFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matchSchedule.MatchScheduleFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.selectedItemId = btn_last_match
 
         /**
-         * Stetho
+         * Stetho for database sqlite testing
          */
 //        // Create an InitializerBuilder
 //        val initializerBuilder = Stetho.newInitializerBuilder(this)

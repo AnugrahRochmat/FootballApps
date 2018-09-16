@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.match_favourites
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchFavourites
 
 import android.content.Context
 import android.graphics.Color
@@ -13,7 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
-import io.github.anugrahrochmat.footballmatchschedule.ui.match_detail.MatchDetailActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.matchDetail.MatchDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx

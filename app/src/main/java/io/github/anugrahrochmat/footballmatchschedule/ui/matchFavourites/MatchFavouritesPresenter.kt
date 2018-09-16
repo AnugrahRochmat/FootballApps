@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.match_favourites
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchFavourites
 
 import android.content.Context
 import io.github.anugrahrochmat.footballmatchschedule.data.database.database

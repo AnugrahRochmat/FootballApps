@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.match_detail
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchDetail
 
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
