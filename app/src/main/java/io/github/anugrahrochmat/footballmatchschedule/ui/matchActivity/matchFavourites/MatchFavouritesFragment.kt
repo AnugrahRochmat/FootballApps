@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchFavourites
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchFavourites
 
 import android.content.Context
 import android.graphics.Color
@@ -13,7 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchDetail.MatchDetailActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail.MatchDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
@@ -27,6 +27,9 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
     private lateinit var tvNoFavourite: TextView
 
     companion object{
+        const val rvMatchFavouritesID = 1
+        const val tvNoFavouriteID = 2
+        const val progressBarFavID = 3
         fun newInstance(): MatchFavouritesFragment {
         return MatchFavouritesFragment()
         }
@@ -53,11 +56,13 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
             lparams(matchParent, matchParent)
 
             rvMatchFavourites = recyclerView {
+                id = rvMatchFavouritesID
                 lparams(matchParent, wrapContent)
                 layoutManager = LinearLayoutManager(ctx)
             }
 
             tvNoFavourite = textView {
+                id = tvNoFavouriteID
                 text = ctx.getString(R.string.table_empty)
                 textColor = Color.RED
                 textSize = 18f
@@ -67,6 +72,7 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
             }
 
             progressBar = progressBar {
+                id = progressBarFavID
             }.lparams {
                 centerInParent()
             }
@@ -74,7 +80,7 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
     }
 
     override fun showMatchFavourites(matches: List<Favourite>){
-        rvMatchFavourites.adapter = MatchFavouritesAdapter(matches){
+        rvMatchFavourites.adapter = MatchFavouritesAdapter(matches) {
             startActivity<MatchDetailActivity>("match" to it.matchID,
                     "homeTeamName" to it.homeTeamName,
                     "awayTeamName" to it.awayTeamName)

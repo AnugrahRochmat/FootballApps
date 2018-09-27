@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchSchedule
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule
 
 import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView

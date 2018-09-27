@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchSchedule
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchDetail.MatchDetailActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail.MatchDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
@@ -23,12 +23,15 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
     private lateinit var progressBar:ProgressBar
 
     companion object{
+        const val rvMatchScheduleID = 1
+        const val progressBarID = 2
+        const val rlItemContainer = 3
         const val PREV: String = "prev"
         const val NEXT: String = "next"
         const val ID_LEAGUE: String = "4332"
         private const val MATCH_SCHEDULE_STATE = "MATCH_SCHEDULE_STATE"
 
-        fun newInstance(match_schedule_state: String):MatchScheduleFragment{
+        fun newInstance(match_schedule_state: String): MatchScheduleFragment {
             val args = Bundle()
             args.putString(MATCH_SCHEDULE_STATE, match_schedule_state)
 
@@ -53,14 +56,17 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         relativeLayout {
+            id = rlItemContainer
             lparams(matchParent, matchParent)
 
             rvMatchSchedule = recyclerView {
+                id = rvMatchScheduleID
                 lparams(matchParent, wrapContent)
                 layoutManager = LinearLayoutManager(ctx)
             }
 
             progressBar = progressBar {
+                id = progressBarID
             }.lparams {
                 centerInParent()
             }
@@ -68,10 +74,10 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
     }
 
     override fun showMatchSchedule(matches: List<MatchSchedule>){
-        rvMatchSchedule.adapter = MatchScheduleAdapter(matches){
+        rvMatchSchedule.adapter = MatchScheduleAdapter(matches) {
             startActivity<MatchDetailActivity>("match" to it.matchId,
-                                                        "homeTeamName" to it.homeTeamName,
-                                                        "awayTeamName" to it.awayTeamName)
+                    "homeTeamName" to it.homeTeamName,
+                    "awayTeamName" to it.awayTeamName)
         }
         adapter.notifyDataSetChanged()
     }

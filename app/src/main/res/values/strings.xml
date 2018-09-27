@@ -24,4 +24,7 @@
     <string name="favourite_remove">Favourite has been removed.</string>
     <string name="table_empty">You haven\'t saved your favourites matches.</string>
     <string name="favourite_removed">Favourite has been removed.</string>
+    <string name="menu_league_spinner">Leagues</string>
+    <string name="search_team">Search</string>
+    <string name="list_team">Teams</string>
 </resources>

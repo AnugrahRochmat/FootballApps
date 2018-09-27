@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchDetail
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail
 
 import android.util.Log
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiClient

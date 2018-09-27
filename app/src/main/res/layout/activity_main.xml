@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.matchActivity.MatchActivity">
 
     <FrameLayout
         android:id="@+id/main_container"
@@ -34,10 +34,8 @@
             app:itemBackground="@color/colorAccent"
             app:itemIconTint="@drawable/nav_item_color_state"
             app:itemTextColor="@drawable/nav_item_color_state"
-            app:menu="@menu/bottom_nav_menu" />
+            app:menu="@menu/match_bottom_nav_menu" />
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

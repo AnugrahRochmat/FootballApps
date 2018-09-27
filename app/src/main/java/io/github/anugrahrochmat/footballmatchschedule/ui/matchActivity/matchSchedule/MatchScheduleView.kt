@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchSchedule
+package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule
 
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 
