@@ -27,4 +27,6 @@
     <string name="menu_league_spinner">Leagues</string>
     <string name="search_team">Search</string>
     <string name="list_team">Teams</string>
+    <string name="error_add_favourite">Error happen when favourite inserted.</string>
+    <string name="error_remove_favourite">Error happer when favourite removed.</string>
 </resources>

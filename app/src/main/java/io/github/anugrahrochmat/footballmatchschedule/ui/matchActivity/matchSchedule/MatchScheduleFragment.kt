@@ -75,9 +75,9 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
 
     override fun showMatchSchedule(matches: List<MatchSchedule>){
         rvMatchSchedule.adapter = MatchScheduleAdapter(matches) {
-            startActivity<MatchDetailActivity>("match" to it.matchId,
-                    "homeTeamName" to it.homeTeamName,
-                    "awayTeamName" to it.awayTeamName)
+            startActivity<MatchDetailActivity>(MatchDetailActivity.EXTRA_MATCH_ID to it.matchId,
+                    MatchDetailActivity.EXTRA_HOME_TEAM_NAME to it.homeTeamName,
+                    MatchDetailActivity.EXTRA_AWAY_TEAM_NAME to it.awayTeamName)
         }
         adapter.notifyDataSetChanged()
     }

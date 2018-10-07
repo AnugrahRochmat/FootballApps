@@ -1,8 +1,11 @@
 package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail
 
+import android.content.Context
+import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 
 interface MatchDetailView {
+    fun getContext(): Context
     fun showLoading()
     fun hideLoading()
     fun loadHomeBadge(urlHomeTeamBadge: String)
@@ -13,4 +16,7 @@ interface MatchDetailView {
     fun showCards(match: MatchSchedule)
     fun showLineups(match: MatchSchedule)
     fun showSubs(match: MatchSchedule)
+    fun showFavorites(favorites: List<Favourite>)
+    fun showFavoriteInserted(rowId: Long)
+    fun showFavouriteDeleted(rowAffected: Int)
 }

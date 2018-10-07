@@ -1,6 +1,6 @@
 package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail
 
-import android.database.sqlite.SQLiteConstraintException
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
@@ -10,20 +10,15 @@ import android.view.MenuItem
 import android.view.View
 import com.squareup.picasso.Picasso
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.R.drawable.ic_round_favorite_24px
-import io.github.anugrahrochmat.footballmatchschedule.R.drawable.ic_round_favorite_border_24px
+import io.github.anugrahrochmat.footballmatchschedule.R.drawable.ic_white_favorite_24dp
+import io.github.anugrahrochmat.footballmatchschedule.R.drawable.ic_white_favorite_border_24dp
 import io.github.anugrahrochmat.footballmatchschedule.R.id.add_favourite
 import io.github.anugrahrochmat.footballmatchschedule.R.layout.activity_match_detail
 import io.github.anugrahrochmat.footballmatchschedule.R.menu.detail_menu
-import io.github.anugrahrochmat.footballmatchschedule.data.database.database
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.db.select
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     private lateinit var presenter: MatchDetailPresenter
@@ -33,8 +28,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     private lateinit var matchId: String
     private lateinit var homeTeamName: String
     private lateinit var awayTeamName: String
+
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
+
+    companion object {
+        const val EXTRA_MATCH_ID = "match_id"
+        const val EXTRA_HOME_TEAM_NAME = "homeTeamName"
+        const val EXTRA_AWAY_TEAM_NAME = "awayTeamName"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,14 +44,22 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = ctx.getString(R.string.match_detail)
 
-        matchId = intent.getSerializableExtra("match").toString()
-        homeTeamName = intent.getSerializableExtra("homeTeamName").toString()
-        awayTeamName = intent.getSerializableExtra("awayTeamName").toString()
+        matchId = intent.getStringExtra(EXTRA_MATCH_ID).toString()
+        homeTeamName = intent.getStringExtra(EXTRA_HOME_TEAM_NAME).toString()
+        awayTeamName = intent.getStringExtra(EXTRA_AWAY_TEAM_NAME).toString()
 
-        favouriteState()
         presenter = MatchDetailPresenter(this)
         presenter.getMatchDetail(matchId)
         presenter.getTeamBadges(homeTeamName, awayTeamName)
+
+        presenter.onViewAttached()
+
+        favouriteState()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onViewDestroyed()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -80,49 +90,24 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     private fun favouriteState(){
-        database.use {
-            val result = select(Favourite.TABLE_FAVOURITE).whereArgs("(MATCH_ID = {id})", "id" to matchId)
-            val favourite = result.parseList(classParser<Favourite>())
-            if (!favourite.isEmpty()) isFavorite = true
-        }
+        presenter.getFavorites(matchId)
     }
 
     private fun setFavourite() {
         if (isFavorite) {
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_round_favorite_24px)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_white_favorite_24dp)
         }
         else {
-            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_round_favorite_border_24px)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_white_favorite_border_24dp)
         }
     }
 
     private fun removeFromFavourite(){
-        try {
-            database.use {
-                delete(Favourite.TABLE_FAVOURITE, "(MATCH_ID = {id})", "id" to matchId)
-            }
-            Snackbar.make(window.decorView.rootView, ctx.getString(R.string.favourite_removed), Snackbar.LENGTH_LONG).show()
-        } catch (e: SQLiteConstraintException) {
-            Snackbar.make(window.decorView.rootView, e.localizedMessage, Snackbar.LENGTH_LONG).show()
-        }
+        presenter.deleteFavorites(matchId)
     }
 
     private fun addFavourite(){
-        try {
-            database.use {
-                insert(Favourite.TABLE_FAVOURITE,
-                        Favourite.MATCH_ID to match.matchId,
-                        Favourite.HOME_TEAM_NAME to match.homeTeamName,
-                        Favourite.HOME_TEAM_SCORE to match.homeTeamScore,
-                        Favourite.HOME_TEAM_BADGE to urlHomeTeamBadge,
-                        Favourite.AWAY_TEAM_NAME to match.awayTeamName,
-                        Favourite.AWAY_TEAM_SCORE to match.awayTeamScore,
-                        Favourite.AWAY_TEAM_BADGE to urlAwayTeamBadge)
-            }
-            Snackbar.make(window.decorView.rootView, ctx.getString(R.string.favourite_added), Snackbar.LENGTH_LONG).show()
-        } catch (e: SQLiteConstraintException) {
-            Snackbar.make(window.decorView.rootView, e.localizedMessage, Snackbar.LENGTH_LONG).show()
-        }
+        presenter.insertFavorites(match, urlHomeTeamBadge, urlAwayTeamBadge)
     }
 
     override fun showMatchDetail(match: MatchSchedule){
@@ -208,11 +193,35 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         Picasso.get().load(urlAwayTeamBadge).into(img_away_team)
     }
 
+    override fun getContext(): Context {
+        return this
+    }
+
     override fun showLoading() {
         progress_bar_detail.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
         progress_bar_detail.visibility = View.GONE
+    }
+
+    override fun showFavorites(favorites: List<Favourite>) {
+        if (!favorites.isEmpty()) isFavorite = true
+    }
+
+    override fun showFavoriteInserted(rowId: Long) {
+        if (rowId > 0) {
+            Snackbar.make(window.decorView.rootView, getString(R.string.favourite_added), Snackbar.LENGTH_LONG).show()
+        } else {
+            Snackbar.make(window.decorView.rootView, getString(R.string.error_add_favourite), Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    override fun showFavouriteDeleted(rowAffected: Int) {
+        if (rowAffected > 0) {
+            Snackbar.make(window.decorView.rootView, getString(R.string.favourite_removed), Snackbar.LENGTH_LONG).show()
+        } else {
+            Snackbar.make(window.decorView.rootView, getString(R.string.error_remove_favourite), Snackbar.LENGTH_LONG).show()
+        }
     }
 }

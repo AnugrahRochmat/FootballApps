@@ -1,8 +1,10 @@
 package io.github.anugrahrochmat.footballmatchschedule.data.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MatchSchedule(
         @SerializedName("idEvent")
         var matchId: String? = null,
@@ -68,4 +70,4 @@ data class MatchSchedule(
 
         @SerializedName("strAwayLineupSubstitutes")
         var awayTeamLineupSubs: String? = null
-) : Serializable
+) : Parcelable

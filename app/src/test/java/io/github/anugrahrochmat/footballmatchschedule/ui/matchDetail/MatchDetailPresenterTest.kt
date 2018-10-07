@@ -1,6 +1,8 @@
 package io.github.anugrahrochmat.footballmatchschedule.ui.matchDetail
 
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
+import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
+import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchScheduleResponse
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Team
 import io.github.anugrahrochmat.footballmatchschedule.data.models.TeamResponse
 import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail.MatchDetailPresenter
@@ -17,15 +19,15 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-
 @RunWith(JUnit4::class)
-class GetTeamBadgesTest {
+class MatchDetailPresenterTest {
     @Mock
     private lateinit var view: MatchDetailView
 
     @Mock
     private lateinit var api: ApiInterface
 
+    val matchId: String = "582086"
     val homeTeamName: String = "Milan"
     val awayTeamName: String = "Roma"
     lateinit var presenter: MatchDetailPresenter
@@ -39,20 +41,26 @@ class GetTeamBadgesTest {
     }
 
     @Test
-    fun test_getTeamBadges_return_success(){
+    fun test_getMatchDetail_and_getTeamBadges_return_success(){
+        val match = Mockito.mock(MatchSchedule::class.java)
+        val matchScheduleResponse = Mockito.mock(MatchScheduleResponse::class.java)
         val team = Mockito.mock(Team::class.java)
         val teamResponse = Mockito.mock(TeamResponse::class.java)
 
+        Mockito.`when`(api.getMatchDetail(matchId)).thenReturn(Observable.just(matchScheduleResponse))
         Mockito.`when`(api.getTeams(homeTeamName)).thenReturn(Observable.just(teamResponse))
         Mockito.`when`(api.getTeams(awayTeamName)).thenReturn(Observable.just(teamResponse))
 
+        presenter.getMatchDetail(matchId)
         presenter.getTeamBadges(homeTeamName, awayTeamName)
 
         launch {
             Mockito.verify(view).showLoading()
             Mockito.verify(view).hideLoading()
+            Mockito.verify(view).showMatchDetail(match)
             Mockito.verify(view).loadHomeBadge(team.teamBadge!!)
             Mockito.verify(view).loadAwayBadge(team.teamBadge!!)
         }
     }
+
 }

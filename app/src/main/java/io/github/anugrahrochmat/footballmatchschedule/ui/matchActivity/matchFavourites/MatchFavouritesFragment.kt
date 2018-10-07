@@ -81,9 +81,9 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
 
     override fun showMatchFavourites(matches: List<Favourite>){
         rvMatchFavourites.adapter = MatchFavouritesAdapter(matches) {
-            startActivity<MatchDetailActivity>("match" to it.matchID,
-                    "homeTeamName" to it.homeTeamName,
-                    "awayTeamName" to it.awayTeamName)
+            startActivity<MatchDetailActivity>(MatchDetailActivity.EXTRA_MATCH_ID to it.matchID,
+                    MatchDetailActivity.EXTRA_HOME_TEAM_NAME to it.homeTeamName,
+                    MatchDetailActivity.EXTRA_AWAY_TEAM_NAME to it.awayTeamName)
         }
     }
 

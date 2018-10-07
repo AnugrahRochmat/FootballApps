@@ -36,6 +36,10 @@ class DatabaseHelper(ctx: Context): ManagedSQLiteOpenHelper(ctx, "FavouriteMatch
         // Here you can upgrade tables, as usual
         db.dropTable(Favourite.TABLE_FAVOURITE, true)
     }
+
+    fun clearTable() {
+        writableDatabase.execSQL("DELETE FROM ${Favourite.TABLE_FAVOURITE}")
+    }
 }
 
 // Access property for Context
