@@ -54,7 +54,5 @@ class MatchScheduleFragmentTest {
         onView(withRecyclerView(MatchScheduleFragment.rvMatchScheduleID).atPosition(listItemPosition))
                 .perform(ViewActions.click())
         onView(withId(rel_layout_match_detail)).check(matches(isDisplayed()))
-
-        delay()
     }
 }
