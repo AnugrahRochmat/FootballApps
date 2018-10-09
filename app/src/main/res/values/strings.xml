@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Football Match Schedule</string>
+    <string name="app_name">Football Apps</string>
     <string name="home_team">Home Team</string>
     <string name="away_team">Away Team</string>
     <string name="match_scores">\u0020 - : -</string>
