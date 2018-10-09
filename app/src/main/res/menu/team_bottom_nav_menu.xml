@@ -16,7 +16,7 @@
     <item
         android:id="@+id/btn_favourites"
         android:enabled="true"
-        android:icon="@drawable/ic_white_favorite_24dp"
+        android:icon="@drawable/ic_round_favorite_24px"
         android:title="@string/favourites"
         app:showAsAction="ifRoom" />
 </menu>

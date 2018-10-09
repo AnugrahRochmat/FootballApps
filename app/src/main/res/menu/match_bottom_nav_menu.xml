@@ -4,19 +4,19 @@
     <item
         android:id="@+id/btn_last_match"
         android:enabled="true"
-        android:icon="@drawable/round_arrow_back_ios_black_18dp"
+        android:icon="@drawable/ic_football_whistle_of_referee"
         android:title="@string/last_match"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/btn_next_match"
         android:enabled="true"
-        android:icon="@drawable/round_arrow_forward_ios_black_18dp"
+        android:icon="@drawable/ic_flaming_football"
         android:title="@string/next_match"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/btn_favourites"
         android:enabled="true"
-        android:icon="@drawable/ic_white_favorite_24dp"
+        android:icon="@drawable/ic_round_favorite_24px"
         android:title="@string/favourites"
         app:showAsAction="ifRoom" />
 </menu>
