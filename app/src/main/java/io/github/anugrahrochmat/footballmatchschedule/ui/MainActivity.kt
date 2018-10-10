@@ -9,7 +9,7 @@ import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchFavourites.MatchFavouritesFragment
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayout.TabsLayoutFragment
-import kotlinx.android.synthetic.main.activity_match.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+
+        // TODO create spinner feature
+        // TODO create search feature
 
         val spinner: Spinner = menu.findItem(R.id.spinner_item_league).actionView as Spinner
         // Create an ArrayAdapter using the string array and a default spinner layout

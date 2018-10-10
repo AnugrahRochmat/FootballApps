@@ -21,7 +21,7 @@ class TabsLayoutFragment: Fragment() {
         }
     }
 
-    // TODO Title Tab View Pager not Fucking Showning
+    // TODO Title Tab View Pager not Fucking Showing
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

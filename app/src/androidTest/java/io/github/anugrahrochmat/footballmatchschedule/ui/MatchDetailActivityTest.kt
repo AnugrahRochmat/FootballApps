@@ -6,7 +6,6 @@ import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.ui.matches.MatchActivity
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +13,7 @@ import org.junit.Test
 
 class MatchDetailActivityTest {
     @Rule
-    @JvmField var activityRule = ActivityTestRule(MatchActivity::class.java, true, true)
+    @JvmField var activityRule = ActivityTestRule(MainActivity::class.java, true, true)
 
     private fun withRecyclerView(recyclerViewId: Int): RecyclerViewMatcher {
         return RecyclerViewMatcher(recyclerViewId)
