@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchFavourites
+package io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchFavourites
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,7 +11,7 @@ import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiClient
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule.MatchScheduleUI
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleUI
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.extensions.LayoutContainer

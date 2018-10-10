@@ -11,14 +11,13 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.R.id.rel_layout_match_detail
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.MatchActivity
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule.MatchScheduleFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 import org.junit.Rule
 import org.junit.Test
 
 class MatchScheduleFragmentTest {
     @Rule
-    @JvmField var activityRule = ActivityTestRule(MatchActivity::class.java, true, true)
+    @JvmField var activityRule = ActivityTestRule(MainActivity::class.java, true, true)
 
     private fun withRecyclerView(recyclerViewId: Int): RecyclerViewMatcher {
         return RecyclerViewMatcher(recyclerViewId)
@@ -45,8 +44,8 @@ class MatchScheduleFragmentTest {
         onView(withId(rel_layout_match_detail)).check(matches(isDisplayed()))
         pressBack()
 
-        onView(withId(R.id.btn_next_match)).check(matches(isDisplayed()))
-        onView(withId(R.id.btn_next_match)).perform(ViewActions.click())
+        onView(withId(R.id.btn_matches)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_matches)).perform(ViewActions.click())
         delay()
 
         onView(withRecyclerView(MatchScheduleFragment.rvMatchScheduleID).atPosition(listItemPosition))

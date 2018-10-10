@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.teamActivity
+package io.github.anugrahrochmat.footballmatchschedule.ui.teams
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

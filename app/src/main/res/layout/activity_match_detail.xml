@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.matchActivity.matchDetail.MatchDetailActivity"
+    tools:context=".ui.matches.matchDetail.MatchDetailActivity"
     android:id="@+id/rel_layout_match_detail">
 
     <ScrollView

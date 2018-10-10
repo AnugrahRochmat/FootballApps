@@ -5,5 +5,13 @@
         android:id="@+id/spinner_item_league"
         android:title="@string/menu_league_spinner"
         app:actionViewClass="android.widget.Spinner"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:actionLayout="@layout/spinner" />
+
+    <item
+        android:id="@+id/searchMenu"
+        app:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_search_black_48px"
+        android:title="@android:string/search_go"
+        app:showAsAction="ifRoom" />
 </menu>

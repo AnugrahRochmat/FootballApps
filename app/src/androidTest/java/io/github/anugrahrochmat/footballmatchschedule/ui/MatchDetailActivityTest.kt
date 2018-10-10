@@ -6,8 +6,8 @@ import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.MatchActivity
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule.MatchScheduleFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.MatchActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 import org.junit.Rule
 import org.junit.Test
 

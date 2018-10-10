@@ -7,15 +7,15 @@ import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.MatchActivity
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchFavourites.MatchFavouritesFragment
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule.MatchScheduleFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.MatchActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchFavourites.MatchFavouritesFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 import org.junit.Rule
 import org.junit.Test
 
 class MatchFavouriteFragmentTest {
     @Rule
-    @JvmField var activityRule = ActivityTestRule(MatchActivity::class.java, true, true)
+    @JvmField var activityRule = ActivityTestRule(MainActivity::class.java, true, true)
 
     private fun withRecyclerView(recyclerViewId: Int): RecyclerViewMatcher {
         return RecyclerViewMatcher(recyclerViewId)

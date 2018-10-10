@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule
+package io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchDetail.MatchDetailActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchDetail.MatchDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx

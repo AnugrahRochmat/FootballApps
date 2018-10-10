@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/btn_last_match"
+        android:id="@+id/btn_matches"
         android:enabled="true"
         android:icon="@drawable/ic_football_whistle_of_referee"
-        android:title="@string/last_match"
+        android:title="@string/matches"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/btn_next_match"
+        android:id="@+id/btn_teams"
         android:enabled="true"
         android:icon="@drawable/ic_flaming_football"
-        android:title="@string/next_match"
+        android:title="@string/teams"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/btn_favourites"

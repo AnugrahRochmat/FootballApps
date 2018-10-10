@@ -5,8 +5,8 @@ package io.github.anugrahrochmat.footballmatchschedule.ui.matchSchedule
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchScheduleResponse
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule.MatchSchedulePresenter
-import io.github.anugrahrochmat.footballmatchschedule.ui.matchActivity.matchSchedule.MatchScheduleView
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchSchedulePresenter
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleView
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.schedulers.Schedulers
