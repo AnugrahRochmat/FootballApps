@@ -4,16 +4,30 @@ import android.util.Log
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiClient
 import io.github.anugrahrochmat.footballmatchschedule.data.api.ApiInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class MatchSchedulePresenter(private val view: MatchScheduleView){
 
     private val TAG: String = MatchSchedulePresenter::class.java.simpleName
 
-    fun getMatchSchedule(scheduleState: String){
+    private var matchScheduleSubscription: Disposable? = null
+
+    fun onViewAttached() {
+    }
+
+    fun onViewDestroyed() {
+        matchScheduleSubscription?.dispose()
+    }
+
+    fun loadSpinnerFeature(scheduleState: String){
+        view.showSpinner(scheduleState)
+    }
+
+    fun getMatchSchedule(scheduleState: String, leagueID: String){
         val apiServices = ApiClient.client.create(ApiInterface::class.java)
         when (scheduleState) {
-            MatchScheduleFragment.PREV -> apiServices.getPreviousSchedules(MatchScheduleFragment.ID_LEAGUE)
+            MatchScheduleFragment.PREV -> apiServices.getPreviousSchedules(leagueID)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext{ view.showLoading() }
@@ -26,7 +40,7 @@ class MatchSchedulePresenter(private val view: MatchScheduleView){
                                 error -> Log.e(TAG, error.message)
                             }
                     )
-            MatchScheduleFragment.NEXT -> apiServices.getNextSchedules(MatchScheduleFragment.ID_LEAGUE)
+            MatchScheduleFragment.NEXT -> apiServices.getNextSchedules(leagueID)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext{ view.showLoading() }

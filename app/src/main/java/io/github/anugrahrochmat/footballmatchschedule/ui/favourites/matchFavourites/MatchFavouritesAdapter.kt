@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchFavourites
+package io.github.anugrahrochmat.footballmatchschedule.ui.favourites.matchFavourites
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log

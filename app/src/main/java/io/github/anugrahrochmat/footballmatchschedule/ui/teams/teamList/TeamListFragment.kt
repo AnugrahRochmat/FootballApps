@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule
+package io.github.anugrahrochmat.footballmatchschedule.ui.teams.teamList
 
 import android.content.Context
 import android.os.Bundle
@@ -10,37 +10,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
+import io.github.anugrahrochmat.footballmatchschedule.data.models.Team
 import io.github.anugrahrochmat.footballmatchschedule.ui.MainActivity
-import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchDetail.MatchDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
-import org.jetbrains.anko.support.v4.startActivity
 
-class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Context> {
-    private lateinit var presenter: MatchSchedulePresenter
-    private lateinit var adapter: MatchScheduleAdapter
-    private lateinit var rvMatchSchedule: RecyclerView
-    private lateinit var progressBar:ProgressBar
-    private lateinit var spinnerMatch: Spinner
+class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
+
+    private lateinit var presenter: TeamListPresenter
+    private lateinit var adapter: TeamListAdapter
+    private lateinit var rvTeamListView: RecyclerView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var spinnerTeam: Spinner
 
     companion object{
-        const val rvMatchScheduleID = 1
+        const val rvTeamListID = 1
         const val progressBarID = 2
         const val rlItemContainer = 3
-        const val spinnerMatchID = 4
-        const val PREV: String = "prev"
-        const val NEXT: String = "next"
-        private const val MATCH_SCHEDULE_STATE = "MATCH_SCHEDULE_STATE"
+        const val spinnerID = 4
         private const val LEAGUE_ID = "LEAGUE_ID"
 
-        fun newInstance(matchScheduleState: String, leagueId: String): MatchScheduleFragment {
+        fun newInstance(leagueId: String): TeamListFragment {
             val args = Bundle()
-            args.putString(MATCH_SCHEDULE_STATE, matchScheduleState)
-            args.putString(LEAGUE_ID, leagueId)
+            args.putString(TeamListFragment.LEAGUE_ID, leagueId)
 
-            val fragment = MatchScheduleFragment()
+            val fragment = TeamListFragment()
             fragment.arguments = args
 
             return fragment
@@ -49,12 +44,11 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val matchState = arguments!!.getString(MATCH_SCHEDULE_STATE)
-        val leagueId = arguments!!.getString(LEAGUE_ID)
+        val leagueId = arguments!!.getString(TeamListFragment.LEAGUE_ID)
 
-        presenter = MatchSchedulePresenter(this)
-        presenter.getMatchSchedule(matchState, leagueId)
-        presenter.loadSpinnerFeature(matchState)
+        presenter = TeamListPresenter(this)
+        presenter.getTeamList(leagueId)
+        presenter.loadSpinnerFeature()
         presenter.onViewAttached()
     }
 
@@ -72,8 +66,8 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
             id = rlItemContainer
             lparams(matchParent, matchParent)
 
-            spinnerMatch = spinner {
-                id = spinnerMatchID
+            spinnerTeam = spinner {
+                id = spinnerID
             }.lparams{
                 leftMargin = dip(8)
                 rightMargin = dip(8)
@@ -81,13 +75,13 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
                 height = wrapContent
             }
 
-            rvMatchSchedule = recyclerView {
-                id = rvMatchScheduleID
+            rvTeamListView = recyclerView {
+                id = rvTeamListID
                 layoutManager = LinearLayoutManager(ctx)
-            }.lparams {
+            }.lparams{
                 width = matchParent
-                height = wrapContent
-                below(spinnerMatchID)
+                height = matchParent
+                below(spinnerID)
             }
 
             progressBar = progressBar {
@@ -98,16 +92,16 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
         }
     }
 
-    override fun showSpinner(matchScheduleState: String) {
+    override fun showSpinner() {
         ArrayAdapter.createFromResource(context, R.array.leagues, R.layout.spinner_style
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
 //                    adapter.setDropDownViewResource(R.layout.spinner_style)
             // Apply the adapter to the spinner
-            spinnerMatch.adapter = adapter
+            spinnerTeam.adapter = adapter
         }
 
-        spinnerMatch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinnerTeam.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View, position: Int, id: Long) {
                 val selected = parentView.getItemAtPosition(position).toString()
@@ -118,11 +112,11 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
                 toast.show()
 
                 when (position) {
-                    0 -> presenter.getMatchSchedule(matchScheduleState, MainActivity.EXTRA_LEAGUE_SERIE_A)
-                    1 -> presenter.getMatchSchedule(matchScheduleState, MainActivity.EXTRA_LEAGUE_EPL)
-                    2 -> presenter.getMatchSchedule(matchScheduleState, MainActivity.EXTRA_LEAGUE_LA_LIGA)
-                    3 -> presenter.getMatchSchedule(matchScheduleState, MainActivity.EXTRA_LEAGUE_BUNDESLIGA)
-                    else -> presenter.getMatchSchedule(matchScheduleState, MainActivity.EXTRA_LEAGUE_LIGUE_1)
+                    0 -> presenter.getTeamList(MainActivity.EXTRA_LEAGUE_SERIE_A)
+                    1 -> presenter.getTeamList(MainActivity.EXTRA_LEAGUE_EPL)
+                    2 -> presenter.getTeamList(MainActivity.EXTRA_LEAGUE_LA_LIGA)
+                    3 -> presenter.getTeamList(MainActivity.EXTRA_LEAGUE_BUNDESLIGA)
+                    else -> presenter.getTeamList(MainActivity.EXTRA_LEAGUE_LIGUE_1)
                 }
             }
 
@@ -131,22 +125,23 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
         }
     }
 
-    override fun showMatchSchedule(matches: List<MatchSchedule>){
-        rvMatchSchedule.adapter = MatchScheduleAdapter(matches) {
-            startActivity<MatchDetailActivity>(MatchDetailActivity.EXTRA_MATCH_ID to it.matchId,
-                    MatchDetailActivity.EXTRA_HOME_TEAM_NAME to it.homeTeamName,
-                    MatchDetailActivity.EXTRA_AWAY_TEAM_NAME to it.awayTeamName)
+    override fun showTeamList(teams: List<Team>) {
+        rvTeamListView.adapter = TeamListAdapter(teams) {
+//            startActivity<MatchDetailActivity>(MatchDetailActivity.EXTRA_MATCH_ID to it.matchId,
+//                    MatchDetailActivity.EXTRA_HOME_TEAM_NAME to it.homeTeamName,
+//                    MatchDetailActivity.EXTRA_AWAY_TEAM_NAME to it.awayTeamName)
         }
         adapter.notifyDataSetChanged()
     }
 
     override fun showLoading(){
         progressBar.visibility = View.VISIBLE
-        rvMatchSchedule.visibility = View.GONE
+        rvTeamListView.visibility = View.GONE
     }
 
     override fun hideLoading(){
         progressBar.visibility = View.GONE
-        rvMatchSchedule.visibility = View.VISIBLE
+        rvTeamListView.visibility = View.VISIBLE
     }
+
 }

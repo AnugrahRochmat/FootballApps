@@ -25,8 +25,8 @@ interface ApiInterface {
     @GET("searchteams.php")
     fun getTeams(@Query("t") t: String): Observable<TeamResponse>
 
-    @GET("search_all_teams.php")
-    fun getTeamsByLeague(@Query("l") id: String): Observable<TeamResponse>
+    @GET("lookup_all_teams.php")
+    fun getTeamsByLeague(@Query("id") id: String): Observable<TeamResponse>
 
     @GET("searchplayers.php")
     fun getPlayersByTeams(@Query("t") id: String): Observable<PlayerResponse>

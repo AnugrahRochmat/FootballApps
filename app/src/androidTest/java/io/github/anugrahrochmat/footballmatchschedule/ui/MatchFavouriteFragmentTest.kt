@@ -7,7 +7,7 @@ import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.rule.ActivityTestRule
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchFavourites.MatchFavouritesFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.favourites.matchFavourites.MatchFavouritesFragment
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 import org.junit.Rule
 import org.junit.Test

@@ -1,4 +1,4 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayout
+package io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayoutMatches
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

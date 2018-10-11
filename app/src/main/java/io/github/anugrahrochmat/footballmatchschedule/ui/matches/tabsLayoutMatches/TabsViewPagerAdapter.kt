@@ -1,8 +1,9 @@
-package io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayout
+package io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayoutMatches
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import io.github.anugrahrochmat.footballmatchschedule.ui.MainActivity
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.matchSchedule.MatchScheduleFragment
 
 /**
@@ -15,8 +16,8 @@ class TabsViewPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> MatchScheduleFragment.newInstance(MatchScheduleFragment.PREV)
-            else -> MatchScheduleFragment.newInstance(MatchScheduleFragment.NEXT)
+            0 -> MatchScheduleFragment.newInstance(MatchScheduleFragment.PREV, MainActivity.EXTRA_LEAGUE_SERIE_A)
+            else -> MatchScheduleFragment.newInstance(MatchScheduleFragment.NEXT, MainActivity.EXTRA_LEAGUE_SERIE_A)
         }
     }
 
