@@ -10,4 +10,7 @@
     <dimen name="text_size_25sp">25sp</dimen>
     <dimen name="line_separator_width">20dp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
+    <dimen name="margin_padding_16dp">16dp</dimen>
+    <dimen name="margin_padding_4dp">4dp</dimen>
+    <dimen name="match_list_badge_dimen">30dp</dimen>
 </resources>

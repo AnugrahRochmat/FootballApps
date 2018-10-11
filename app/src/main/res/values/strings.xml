@@ -31,6 +31,9 @@
     <string name="error_remove_favourite">Error happer when favourite removed.</string>
     <string name="matches">Matches</string>
     <string name="teams">Teams</string>
+    <string name="date_demo">Thu, 11 Oct 2018</string>
+    <string name="time_demo">22:00</string>
+    <string name="zero">0</string>
 
     <string-array name="leagues">
         <item>Italian Serie A</item>

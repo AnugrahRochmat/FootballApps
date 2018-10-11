@@ -19,6 +19,9 @@ import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     private lateinit var presenter: MatchDetailPresenter
@@ -117,51 +120,60 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         showCards(match)
         showLineups(match)
         showSubs(match)
+        showDateTime(match)
+    }
+
+    override fun showDateTime(match: MatchSchedule) {
+        val dateParsed = LocalDate.parse(match.dateEvent, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        val dateFormatted = dateParsed.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy"))
+        val timeParsed = LocalTime.parse(match.strTime, DateTimeFormatter.ISO_OFFSET_TIME)
+        val timeFormatted = timeParsed.plusHours(7).toString()
+        tv_date_time_detail.text = "${dateFormatted}  (${timeFormatted} WIB)"
     }
 
     override fun showHeader(match: MatchSchedule){
         // Team Header
-        tv_home_team_name.text = match.homeTeamName
-        tv_away_team_name.text = match.awayTeamName
+        tv_home_team_name_detail.text = match.homeTeamName
+        tv_away_team_name_detail.text = match.awayTeamName
 
         // Match Score
         val matchScore = String.format(ctx.getString(R.string.blank_scores2), match.homeTeamScore, match.awayTeamScore)
         if (!matchScore.contains("null")) {
-            tv_match_scores.text = matchScore
+            tv_match_scores_detail.text = matchScore
         } else {
-            tv_match_scores.text = ctx.getString(R.string.match_scores2)
+            tv_match_scores_detail.text = ctx.getString(R.string.match_scores2)
         }
     }
 
     override fun showGoals(match: MatchSchedule){
         // Goals Details
-        tv_home_scores.text = match.homeTeamGoalDetail?.replace(";", "\n")
-        tv_away_scores.text = match.awayTeamGoalDetail?.replace(";", "\n")
+        tv_home_scores_detail.text = match.homeTeamGoalDetail?.replace(";", "\n")
+        tv_away_scores_detail.text = match.awayTeamGoalDetail?.replace(";", "\n")
     }
 
     override fun showCards(match: MatchSchedule){
         // Yellow Cards & Red Cards
-        tv_home_yellow.text = match.homeTeamYellowCards?.replace(";", "\n")
-        tv_away_yellow.text = match.awayTeamYellowCards?.replace(";", "\n")
-        tv_home_red.text = match.homeTeamRedCards?.replace(";", "\n")
-        tv_away_red.text = match.awayTeamRedCards?.replace(";", "\n")
+        tv_home_yellow_detail.text = match.homeTeamYellowCards?.replace(";", "\n")
+        tv_away_yellow_detail.text = match.awayTeamYellowCards?.replace(";", "\n")
+        tv_home_red_detail.text = match.homeTeamRedCards?.replace(";", "\n")
+        tv_away_red_detail.text = match.awayTeamRedCards?.replace(";", "\n")
     }
 
     override fun showSubs(match: MatchSchedule){
         // Home Subs
         val homeSubs = String.format(ctx.getString(R.string.blank), match.homeTeamLineupSubs?.replace(";", "\n"))
         if (!homeSubs.contains("null")){
-            tv_home_subs.text = homeSubs
+            tv_home_subs_detail.text = homeSubs
         } else {
-            tv_home_subs.text = ctx.getString(R.string.empty)
+            tv_home_subs_detail.text = ctx.getString(R.string.empty)
         }
 
         // Away Subs
         val awaySubs = String.format(ctx.getString(R.string.blank), match.awayTeamLineupSubs?.replace(";", "\n"))
         if (!awaySubs.contains("null")){
-            tv_away_subs.text = awaySubs
+            tv_away_subs_detail.text = awaySubs
         } else {
-            tv_away_subs.text = ctx.getString(R.string.empty)
+            tv_away_subs_detail.text = ctx.getString(R.string.empty)
         }
     }
 
@@ -169,28 +181,28 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         // Home Lineups
         val homeLineups: String = match.homeTeamLineupGK + match.homeTeamLineupDef + match.homeTeamLineupMid + match.homeTeamLineupFw
         if (!homeLineups.contains("null")){
-            tv_home_lineup.text = String.format(ctx.getString(R.string.blank), homeLineups.replace(";", "\n"))
+            tv_home_lineup_detail.text = String.format(ctx.getString(R.string.blank), homeLineups.replace(";", "\n"))
         } else {
-            tv_home_lineup.text = ctx.getString(R.string.empty)
+            tv_home_lineup_detail.text = ctx.getString(R.string.empty)
         }
 
         // Away Lineups
         val awayLineups: String = match.awayTeamLineupGK + match.awayTeamLineupDef + match.awayTeamLineupMid + match.awayTeamLineupFw
         if (!awayLineups.contains("null")){
-            tv_away_lineup.text = String.format(ctx.getString(R.string.blank), awayLineups.replace(";", "\n"))
+            tv_away_lineup_detail.text = String.format(ctx.getString(R.string.blank), awayLineups.replace(";", "\n"))
         } else {
-            tv_away_lineup.text = ctx.getString(R.string.empty)
+            tv_away_lineup_detail.text = ctx.getString(R.string.empty)
         }
     }
 
     override fun loadHomeBadge(urlHomeTeamBadge: String){
         this.urlHomeTeamBadge = urlHomeTeamBadge
-        Picasso.get().load(urlHomeTeamBadge).into(img_home_team)
+        Picasso.get().load(urlHomeTeamBadge).into(img_home_team_detail)
     }
 
     override fun loadAwayBadge(urlAwayTeamBadge: String){
         this.urlAwayTeamBadge = urlAwayTeamBadge
-        Picasso.get().load(urlAwayTeamBadge).into(img_away_team)
+        Picasso.get().load(urlAwayTeamBadge).into(img_away_team_detail)
     }
 
     override fun getContext(): Context {

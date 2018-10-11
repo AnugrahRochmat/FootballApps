@@ -30,8 +30,9 @@ class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<C
         const val rvMatchFavouritesID = 1
         const val tvNoFavouriteID = 2
         const val progressBarFavID = 3
+
         fun newInstance(): MatchFavouritesFragment {
-        return MatchFavouritesFragment()
+            return MatchFavouritesFragment()
         }
     }
 

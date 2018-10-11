@@ -74,8 +74,8 @@ class TeamListUI : AnkoComponent<ViewGroup> {
                 }
             }
             view {
-                backgroundColor = R.color.darker_gray
-            }.lparams(matchParent, dip(1))
+                backgroundDrawable = ctx.getDrawable(R.drawable.shadow)
+            }.lparams(matchParent, dip(4))
         }
     }
 }

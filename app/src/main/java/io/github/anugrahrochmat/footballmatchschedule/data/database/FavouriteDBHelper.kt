@@ -21,7 +21,9 @@ class FavouriteDBHelper {
                         Favourite.HOME_TEAM_BADGE to homeTeamBadge,
                         Favourite.AWAY_TEAM_NAME to match.awayTeamName,
                         Favourite.AWAY_TEAM_SCORE to match.awayTeamScore,
-                        Favourite.AWAY_TEAM_BADGE to awayTeamBadge)
+                        Favourite.AWAY_TEAM_BADGE to awayTeamBadge,
+                        Favourite.DATE_EVENT to match.dateEvent,
+                        Favourite.STR_TIME to match.strTime)
             }
             return rowId
         }

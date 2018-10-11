@@ -75,6 +75,14 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
                 height = wrapContent
             }
 
+            view {
+                backgroundDrawable = ctx.getDrawable(R.drawable.shadow)
+            }.lparams{
+                width = matchParent
+                height = dip(4)
+                below(spinnerID)
+            }
+
             rvTeamListView = recyclerView {
                 id = rvTeamListID
                 layoutManager = LinearLayoutManager(ctx)

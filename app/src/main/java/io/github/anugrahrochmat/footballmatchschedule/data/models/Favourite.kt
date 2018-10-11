@@ -8,7 +8,9 @@ data class Favourite(
         val homeTeamBadge: String?,
         val awayTeamName: String?,
         val awayTeamScore: String?,
-        val awayTeamBadge: String?) {
+        val awayTeamBadge: String?,
+        val dateEvent: String,
+        val strTime: String) {
 
     companion object {
         const val TABLE_FAVOURITE: String = "TABLE_FAVOURITE"
@@ -20,5 +22,7 @@ data class Favourite(
         const val AWAY_TEAM_NAME: String = "AWAY_TEAM_NAME"
         const val AWAY_TEAM_SCORE: String = "AWAY_TEAM_SCORE"
         const val AWAY_TEAM_BADGE: String = "AWAY_TEAM_BADGE"
+        const val DATE_EVENT: String = "DATE_EVENT"
+        const val STR_TIME: String = "STR_TIME"
     }
 }

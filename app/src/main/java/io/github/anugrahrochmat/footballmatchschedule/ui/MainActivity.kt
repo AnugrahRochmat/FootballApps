@@ -50,104 +50,16 @@ class MainActivity : AppCompatActivity() {
 //        // Initialize Stetho with the Initializer
 //        Stetho.initialize(initializerBuilder.build())
 
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//
-//            override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View, position: Int, id: Long) {
-//                val selected = parentView.getItemAtPosition(position).toString()
-//                val context = parentView.context
-//                val duration = Toast.LENGTH_SHORT
-//
-//                val toast = Toast.makeText(context, selected, duration)
-//                toast.show()
-//
-//                when (position) {
-//                    0 -> loadTeamListFragment(EXTRA_LEAGUE_SERIE_A)
-//                    1 -> loadTeamListFragment(EXTRA_LEAGUE_EPL)
-//                    2 -> loadTeamListFragment(EXTRA_LEAGUE_LA_LIGA)
-//                    3 -> loadTeamListFragment(EXTRA_LEAGUE_BUNDESLIGA)
-//                    else -> loadTeamListFragment(EXTRA_LEAGUE_LIGUE_1)
-//                }
-//            }
-//
-//            override fun onNothingSelected(parentView: AdapterView<*>) {
-//            }
-//        }
-
-//        val spinner: Spinner = object : AdapterView.OnItemSelectedListener {
-
-//            spinner.onItemSelectedListener(this) {
-//                override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View, position: Int, id: Long) {
-//                    val selected = parentView.getItemAtPosition(position).toString()
-//                    val context = parentView.context
-//                    val duration = Toast.LENGTH_SHORT
-//
-//                    val toast = Toast.makeText(context, selected, duration)
-//                    toast.show()
-//
-//                    when (position) {
-//                        0 -> loadTeamListFragment(savedInstanceState, EXTRA_LEAGUE_SERIE_A)
-//                        1 -> loadTeamListFragment(savedInstanceState, EXTRA_LEAGUE_EPL)
-//                        2 -> loadTeamListFragment(savedInstanceState, EXTRA_LEAGUE_LA_LIGA)
-//                        3 -> loadTeamListFragment(savedInstanceState, EXTRA_LEAGUE_BUNDESLIGA)
-//                        else -> loadTeamListFragment(savedInstanceState, EXTRA_LEAGUE_LIGUE_1)
-//                    }
-//                }
-//
-//                override fun onNothingSelected(parentView: AdapterView<*>) {
-//                    // your code here
-//                }
-//            }
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
 
-        // TODO create spinner feature
         // TODO create search feature
-
-//        val spinner: Spinner = menu.findItem(R.id.spinner_item_league).actionView as Spinner
-//
-//        ArrayAdapter.createFromResource(this, R.array.leagues, R.layout.spinner_style
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-////                    adapter.setDropDownViewResource(R.layout.spinner_style)
-//            // Apply the adapter to the spinner
-//            spinner.adapter = adapter
-//        }
-
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//
-//            override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View, position: Int, id: Long) {
-//                val selected = parentView.getItemAtPosition(position).toString()
-//                val context = parentView.context
-//                val duration = Toast.LENGTH_SHORT
-//
-//                val toast = Toast.makeText(context, selected, duration)
-//                toast.show()
-//
-//                when (position) {
-//                    0 -> loadTeamListFragment(EXTRA_LEAGUE_SERIE_A)
-//                    1 -> loadTeamListFragment(EXTRA_LEAGUE_EPL)
-//                    2 -> loadTeamListFragment(EXTRA_LEAGUE_LA_LIGA)
-//                    3 -> loadTeamListFragment(EXTRA_LEAGUE_BUNDESLIGA)
-//                    else -> loadTeamListFragment(EXTRA_LEAGUE_LIGUE_1)
-//                }
-//            }
-//
-//            override fun onNothingSelected(parentView: AdapterView<*>) {
-//            }
-//    }
 
         return true
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        when(item?.itemId) {
-//            R.id.spinner -> loadTeamListFragment(savedInstanceState, EXTRA_LEAGUE_LA_LIGA)
-//        }
-//        //        return super.onOptionsItemSelected(item)
-//    }
 
     private fun loadTabLayoutMatch(savedInstanceState: Bundle?){
         if (savedInstanceState == null) {

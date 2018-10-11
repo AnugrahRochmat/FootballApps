@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 import org.jetbrains.anko.db.*
 
-class DatabaseHelper(ctx: Context): ManagedSQLiteOpenHelper(ctx, "FavouriteMatch.db", null, 2) {
+class DatabaseHelper(ctx: Context): ManagedSQLiteOpenHelper(ctx, "FavouriteMatch.db", null, 3) {
 
     companion object {
         private var instance: DatabaseHelper? = null
@@ -29,7 +29,9 @@ class DatabaseHelper(ctx: Context): ManagedSQLiteOpenHelper(ctx, "FavouriteMatch
                 Favourite.HOME_TEAM_BADGE to TEXT,
                 Favourite.AWAY_TEAM_NAME to TEXT,
                 Favourite.AWAY_TEAM_SCORE to TEXT,
-                Favourite.AWAY_TEAM_BADGE to TEXT)
+                Favourite.AWAY_TEAM_BADGE to TEXT,
+                Favourite.DATE_EVENT to TEXT,
+                Favourite.STR_TIME to TEXT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

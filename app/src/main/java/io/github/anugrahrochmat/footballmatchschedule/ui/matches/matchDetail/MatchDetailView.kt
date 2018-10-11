@@ -16,6 +16,7 @@ interface MatchDetailView {
     fun showCards(match: MatchSchedule)
     fun showLineups(match: MatchSchedule)
     fun showSubs(match: MatchSchedule)
+    fun showDateTime(match: MatchSchedule)
     fun showFavorites(favorites: List<Favourite>)
     fun showFavoriteInserted(rowId: Long)
     fun showFavouriteDeleted(rowAffected: Int)

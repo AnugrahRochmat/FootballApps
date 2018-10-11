@@ -21,6 +21,15 @@ data class MatchSchedule(
         @SerializedName("intAwayScore")
         var awayTeamScore: Int? = null,
 
+        @SerializedName("dateEvent")
+        var dateEvent: String? = null,
+
+        @SerializedName("strDate")
+        var strDate: String? = null,
+
+        @SerializedName("strTime")
+        var strTime: String? = null,
+
         // Home team Details
         @SerializedName("strHomeGoalDetails")
         var homeTeamGoalDetail: String? = null,

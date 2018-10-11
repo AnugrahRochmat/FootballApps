@@ -16,7 +16,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/margin_padding_8dp">
-            <!--Match Scores-->
+
+            <TextView
+                android:id="@+id/tv_date_time_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:padding="@dimen/margin_padding_8dp"/>
+
+            <!-- Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,11 +36,11 @@
                     android:orientation="vertical"
                     android:gravity="center">
                     <ImageView
-                        android:id="@+id/img_home_team"
+                        android:id="@+id/img_home_team_detail"
                         android:layout_width="@dimen/team_badge_dimen"
                         android:layout_height="@dimen/team_badge_dimen" />
                     <TextView
-                        android:id="@+id/tv_home_team_name"
+                        android:id="@+id/tv_home_team_name_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/home_team"
@@ -42,7 +50,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tv_match_scores"
+                    android:id="@+id/tv_match_scores_detail"
                     android:layout_width="@dimen/match_scores_width"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -56,11 +64,11 @@
                     android:orientation="vertical"
                     android:gravity="center">
                     <ImageView
-                        android:id="@+id/img_away_team"
+                        android:id="@+id/img_away_team_detail"
                         android:layout_width="@dimen/team_badge_dimen"
                         android:layout_height="@dimen/team_badge_dimen" />
                     <TextView
-                        android:id="@+id/tv_away_team_name"
+                        android:id="@+id/tv_away_team_name_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/away_team"
@@ -78,7 +86,7 @@
                 android:gravity="center_horizontal"
                 android:paddingTop="@dimen/margin_padding_8dp">
                 <TextView
-                    android:id="@+id/tv_home_scores"
+                    android:id="@+id/tv_home_scores_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -88,7 +96,7 @@
                     android:layout_width="@dimen/line_separator_width"
                     android:layout_height="0dp"/>
                 <TextView
-                    android:id="@+id/tv_away_scores"
+                    android:id="@+id/tv_away_scores_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -117,7 +125,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
                 <TextView
-                    android:id="@+id/tv_home_yellow"
+                    android:id="@+id/tv_home_yellow_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -127,7 +135,7 @@
                     android:layout_width="@dimen/line_separator_width"
                     android:layout_height="0dp"/>
                 <TextView
-                    android:id="@+id/tv_away_yellow"
+                    android:id="@+id/tv_away_yellow_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -156,7 +164,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
                 <TextView
-                    android:id="@+id/tv_home_red"
+                    android:id="@+id/tv_home_red_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -166,7 +174,7 @@
                     android:layout_width="@dimen/line_separator_width"
                     android:layout_height="0dp"/>
                 <TextView
-                    android:id="@+id/tv_away_red"
+                    android:id="@+id/tv_away_red_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -195,7 +203,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
                 <TextView
-                    android:id="@+id/tv_home_lineup"
+                    android:id="@+id/tv_home_lineup_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -205,7 +213,7 @@
                     android:layout_width="@dimen/line_separator_width"
                     android:layout_height="0dp"/>
                 <TextView
-                    android:id="@+id/tv_away_lineup"
+                    android:id="@+id/tv_away_lineup_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="left"
@@ -234,7 +242,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
                 <TextView
-                    android:id="@+id/tv_home_subs"
+                    android:id="@+id/tv_home_subs_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -244,7 +252,7 @@
                     android:layout_width="@dimen/line_separator_width"
                     android:layout_height="0dp"/>
                 <TextView
-                    android:id="@+id/tv_away_subs"
+                    android:id="@+id/tv_away_subs_detail"
                     android:layout_width="@dimen/team_detail_width"
                     android:layout_height="wrap_content"
                     android:gravity="left"
