@@ -23,7 +23,6 @@ class MatchFavouritesAdapter(private val favMatches: List<Favourite>, private va
     : RecyclerView.Adapter<MatchFavouritesViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchFavouritesViewHolder {
-//        return MatchFavouritesViewHolder(MatchScheduleUI().createView(AnkoContext.create(parent.context, parent)))
         val view = LayoutInflater.from(parent.context).inflate(R.layout.match_schedule_item_list, parent, false)
         return MatchFavouritesViewHolder(view)
     }
@@ -96,57 +95,5 @@ class MatchFavouritesViewHolder(override val containerView: View): RecyclerView.
                 )
     }
 
-//    private val tvHomeTeam: TextView = itemView.findViewById(MatchScheduleUI.tvHomeTeamID)
-//    private val tvAwayTeam: TextView = itemView.findViewById(MatchScheduleUI.tvAwayTeamID)
-//    private val tvMatchScores: TextView = itemView.findViewById(MatchScheduleUI.tvMatchScoresID)
-//    private val imgHomeTeam: ImageView = itemView.findViewById(MatchScheduleUI.imgHomeTeamID)
-//    private val imgAwayTeam: ImageView = itemView.findViewById(MatchScheduleUI.imgAwayTeamID)
-//
-//    fun bindItem(favMatches: Favourite, listener: (Favourite) -> Unit){
-//        tvHomeTeam.text = favMatches.homeTeamName
-//        tvAwayTeam.text = favMatches.awayTeamName
-//
-//        val matchScore = String.format(containerView.context.getString(R.string.blank_scores), favMatches.homeTeamScore, favMatches.awayTeamScore)
-//        if (!matchScore.contains("null")) {
-//            tvMatchScores.text = matchScore
-//        } else {
-//            tvMatchScores.text = containerView.context.getString(R.string.match_scores)
-//        }
-//
-//        getHomeTeamBadge(favMatches.homeTeamName)
-//        getAwayTeamBadge(favMatches.awayTeamName)
-//
-//        containerView.setOnClickListener { listener(favMatches) }
-//    }
-//
-//    private fun getHomeTeamBadge(teamName: String?) {
-//        val apiServices = ApiClient.client.create(ApiInterface::class.java)
-//        apiServices.getTeams(teamName!!)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        {
-//                            result -> Picasso.get().load(result.teams!![0].teamBadge.toString()).into(imgHomeTeam)
-//                        },
-//                        {
-//                            error -> Log.e("Error", error.message)
-//                        }
-//                )
-//    }
-//
-//    private fun getAwayTeamBadge(teamName: String?) {
-//        val apiServices = ApiClient.client.create(ApiInterface::class.java)
-//        apiServices.getTeams(teamName!!)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        {
-//                            result -> Picasso.get().load(result.teams!![0].teamBadge.toString()).into(imgAwayTeam)
-//                        },
-//                        {
-//                            error -> Log.e("Error", error.message)
-//                        }
-//                )
-//    }
 }
 
