@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import io.github.anugrahrochmat.footballmatchschedule.R
-import io.github.anugrahrochmat.footballmatchschedule.ui.favourites.matchFavourites.MatchFavouritesFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.favourites.tabLayoutFavourite.TabsFavouritesLayoutFragment
 import io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayoutMatches.TabsLayoutFragment
 import io.github.anugrahrochmat.footballmatchschedule.ui.teams.teamList.TeamListFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     loadTeamListFragment(EXTRA_LEAGUE_SERIE_A)
                 }
                 R.id.btn_favourites -> {
-                    loadMatchFavoritesFragment(savedInstanceState)
+                    loadFavoritesFragment(savedInstanceState)
                 }
             }
             true
@@ -79,11 +79,11 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun loadMatchFavoritesFragment(savedInstanceState: Bundle?) {
+    private fun loadFavoritesFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_container, MatchFavouritesFragment.newInstance(), MatchFavouritesFragment::class.java.simpleName)
+                    .replace(R.id.main_container, TabsFavouritesLayoutFragment.newInstance(), TabsFavouritesLayoutFragment::class.java.simpleName)
                     .commit()
         }
     }

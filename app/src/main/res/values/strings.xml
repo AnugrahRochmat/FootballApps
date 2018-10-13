@@ -42,6 +42,8 @@
     <string name="born_date">Born</string>
     <string name="height">Height</string>
     <string name="weight">Weight</string>
+    <string name="team_favourite_added">Team Favourite has beed added.</string>
+    <string name="team_favourite_removed">Team Favourite has been removed.</string>
 
     <string-array name="leagues">
         <item>Italian Serie A</item>

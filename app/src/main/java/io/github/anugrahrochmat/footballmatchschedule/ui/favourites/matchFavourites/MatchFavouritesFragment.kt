@@ -21,7 +21,6 @@ import org.jetbrains.anko.support.v4.startActivity
 
 class MatchFavouritesFragment : Fragment(), MatchFavouritesView, AnkoComponent<Context> {
     private lateinit var presenter: MatchFavouritesPresenter
-    private lateinit var adapter: MatchFavouritesAdapter
     private lateinit var rvMatchFavourites: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var tvNoFavourite: TextView
