@@ -1,9 +1,11 @@
 package io.github.anugrahrochmat.footballmatchschedule.data.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Team(
-
         @SerializedName("idTeam")
         var teamId: String? = null,
 
@@ -24,4 +26,4 @@ data class Team(
 
         @SerializedName("intFormedYear")
         var formedYear: String? = null
-)
+): Parcelable

@@ -19,7 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.matches.matchDetail.MatchDetailActivity" />
-        <activity android:name=".ui.teams.teamDetail.TeamDetailActivity"></activity>
+        <activity
+            android:name=".ui.teams.teamDetail.TeamDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.teams.teamDetail.teamPlayers.playerDetail.PlayerDetailActivity"></activity>
     </application>
 
 </manifest>

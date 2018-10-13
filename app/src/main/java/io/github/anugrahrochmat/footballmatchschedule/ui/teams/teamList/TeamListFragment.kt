@@ -1,6 +1,7 @@
 package io.github.anugrahrochmat.footballmatchschedule.ui.teams.teamList
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import android.widget.*
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Team
 import io.github.anugrahrochmat.footballmatchschedule.ui.MainActivity
+import io.github.anugrahrochmat.footballmatchschedule.ui.teams.teamDetail.TeamDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
@@ -104,7 +106,7 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
         ArrayAdapter.createFromResource(context, R.array.leagues, R.layout.spinner_style
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
-//                    adapter.setDropDownViewResource(R.layout.spinner_style)
+//             adapter.setDropDownViewResource(R.layout.spinner_style)
             // Apply the adapter to the spinner
             spinnerTeam.adapter = adapter
         }
@@ -135,9 +137,10 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
 
     override fun showTeamList(teams: List<Team>) {
         rvTeamListView.adapter = TeamListAdapter(teams) {
-//            startActivity<MatchDetailActivity>(MatchDetailActivity.EXTRA_MATCH_ID to it.matchId,
-//                    MatchDetailActivity.EXTRA_HOME_TEAM_NAME to it.homeTeamName,
-//                    MatchDetailActivity.EXTRA_AWAY_TEAM_NAME to it.awayTeamName)
+            val intent = Intent(context, TeamDetailActivity::class.java)
+            intent.putExtra(TeamDetailActivity.EXTRA_TEAM, it)
+
+            startActivity(intent)
         }
         adapter.notifyDataSetChanged()
     }

@@ -13,4 +13,13 @@
     <dimen name="margin_padding_16dp">16dp</dimen>
     <dimen name="margin_padding_4dp">4dp</dimen>
     <dimen name="match_list_badge_dimen">30dp</dimen>
+    <dimen name="detail_backdrop_height">312dp</dimen>
+    <dimen name="cutout_dimension">40dp</dimen>
+    <dimen name="margin_padding_64dp">64dp</dimen>
+    <dimen name="margin_padding_32dp">32dp</dimen>
+    <dimen name="margin_padding_40dp">40dp</dimen>
+    <dimen name="margin_padding_28dp">28dp</dimen>
+    <dimen name="player_detail_photo_dimen">150dp</dimen>
+    <dimen name="player_detail_field_width">100dp</dimen>
+    <dimen name="margin_padding_2dp">2dp</dimen>
 </resources>
