@@ -14,9 +14,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.match_schedule_item_list.*
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MatchScheduleAdapter(private val matches: List<MatchSchedule>, private val listener: (MatchSchedule) -> Unit)
     : RecyclerView.Adapter<MatchScheduleViewHolder>(){
@@ -35,25 +34,32 @@ class MatchScheduleAdapter(private val matches: List<MatchSchedule>, private val
 }
 
 class MatchScheduleViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
+    private val apiServices = ApiClient.client.create(ApiInterface::class.java)
+
     fun bindItem(matches: MatchSchedule, listener: (MatchSchedule) -> Unit){
         tv_home_team_name.text = matches.homeTeamName
         tv_away_team_name.text = matches.awayTeamName
-        tv_match_date.text = matches.dateEvent
-        tv_match_time.text = matches.strTime
         tv_home_scores.text = parseScore(matches.homeTeamScore.toString())
         tv_away_scores.text = parseScore(matches.awayTeamScore.toString())
 
+        val dateAndTimeFormatted: Date? = toGMTFormat(matches.strDate!!, matches.strTime!!)
+        val dateFormatted = SimpleDateFormat("EEE, dd MMMM yyyy")
+        val timeFormatted = SimpleDateFormat("HH:mm:ss")
 
-        val dateFormatted = LocalDate.parse(matches.dateEvent, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        tv_match_date.text = dateFormatted.format(DateTimeFormatter.ofPattern("EEE, dd MMM yyyy"))
-
-        val timeFormatted = LocalTime.parse(matches.strTime, DateTimeFormatter.ISO_OFFSET_TIME)
-        tv_match_time.text = timeFormatted.plusHours(7).toString()
+        tv_match_date.text = dateFormatted.format(dateAndTimeFormatted)
+        tv_match_time.text = timeFormatted.format(dateAndTimeFormatted)
 
         getHomeTeamBadge(matches.homeTeamName)
         getAwayTeamBadge(matches.awayTeamName)
 
         containerView.setOnClickListener { listener(matches) }
+    }
+
+    private fun toGMTFormat (date: String, time: String): Date? {
+        val formatter = SimpleDateFormat ("dd/MM/yy HH:mm:ss")
+        formatter.timeZone = TimeZone.getTimeZone ("UTC")
+        val dateTime = "$date $time"
+        return formatter.parse(dateTime)
     }
 
     private fun parseScore(teamScore: String): String{
@@ -65,7 +71,6 @@ class MatchScheduleViewHolder(override val containerView: View): RecyclerView.Vi
     }
 
     private fun getHomeTeamBadge(teamName: String?) {
-        val apiServices = ApiClient.client.create(ApiInterface::class.java)
         apiServices.getTeams(teamName!!)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,7 +85,6 @@ class MatchScheduleViewHolder(override val containerView: View): RecyclerView.Vi
     }
 
     private fun getAwayTeamBadge(teamName: String?) {
-        val apiServices = ApiClient.client.create(ApiInterface::class.java)
         apiServices.getTeams(teamName!!)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

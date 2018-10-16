@@ -15,9 +15,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.match_schedule_item_list.*
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  *  Created by Anugrah Rochmat on 13/10/18
@@ -39,27 +38,26 @@ class MatchSearchAdapter(private val searchMatches: List<MatchSchedule>, private
 }
 
 class MatchSearchViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
+    private val apiServices = ApiClient.client.create(ApiInterface::class.java)
+
+
     fun bindItem(searchMatch: MatchSchedule, listener: (MatchSchedule) -> Unit){
         tv_home_team_name.text = searchMatch.homeTeamName
         tv_away_team_name.text = searchMatch.awayTeamName
-        tv_match_date.text = searchMatch.dateEvent
-        tv_match_time.text = searchMatch.strTime
         tv_home_scores.text = parseScore(searchMatch.homeTeamScore.toString())
         tv_away_scores.text = parseScore(searchMatch.awayTeamScore.toString())
 
-
-        val dateFormatted = LocalDate.parse(searchMatch.dateEvent, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        tv_match_date.text = dateFormatted.format(DateTimeFormatter.ofPattern("EEE, dd MMM yyyy"))
-
-
-
-
         if (!searchMatch.strTime.isNullOrEmpty()) {
-            checkSearchTime(searchMatch.strTime.toString())
-        } else {
-            tv_match_time.text = "Null"
-        }
+            val dateAndTimeFormatted: Date? = toGMTFormat(searchMatch.dateEvent!!, searchMatch.strTime!!)
+            val dateFormatted = SimpleDateFormat("EEE, dd MMMM yyyy")
+            val timeFormatted = SimpleDateFormat("HH:mm:ss")
 
+            tv_match_date.text = dateFormatted.format(dateAndTimeFormatted)
+            tv_match_time.text = timeFormatted.format(dateAndTimeFormatted)
+        } else {
+            tv_match_date.text = containerView.resources.getString(R.string.nullvalue)
+            tv_match_time.text = containerView.resources.getString(R.string.nullvalue)
+        }
 
         if (!searchMatch.homeTeamName.isNullOrEmpty()) {
             getHomeTeamBadge(searchMatch.homeTeamName)
@@ -73,16 +71,16 @@ class MatchSearchViewHolder(override val containerView: View): RecyclerView.View
         containerView.setOnClickListener { listener(searchMatch) }
     }
 
-    private fun checkSearchTime(strTime: String){
-        if(strTime.length == 14) {
-            val timeFormatted = LocalTime.parse(strTime, DateTimeFormatter.ISO_OFFSET_TIME)
-            tv_match_time.text = timeFormatted.plusHours(7).toString()
-        } else if(strTime.length == 8) {
-            val timeFormatted = LocalTime.parse(strTime, DateTimeFormatter.ISO_LOCAL_TIME)
-            tv_match_time.text = timeFormatted.plusHours(7).toString()
+    private fun toGMTFormat (date: String, time: String): Date? {
+        var formatter: SimpleDateFormat
+        if(time.length >= 8) {
+            formatter = SimpleDateFormat ("yyyy-MM-dd HH:mm:ss")
         } else {
-            tv_match_time.text = strTime
+            formatter = SimpleDateFormat ("yyyy-MM-dd HH:mm")
         }
+        formatter.timeZone = TimeZone.getTimeZone ("UTC")
+        val dateTime = "$date $time"
+        return formatter.parse(dateTime)
     }
 
     private fun parseScore(teamScore: String): String{
@@ -95,7 +93,6 @@ class MatchSearchViewHolder(override val containerView: View): RecyclerView.View
 
     @SuppressLint("CheckResult")
     private fun getHomeTeamBadge(teamName: String?) {
-        val apiServices = ApiClient.client.create(ApiInterface::class.java)
         apiServices.getTeams(teamName!!)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -116,7 +113,6 @@ class MatchSearchViewHolder(override val containerView: View): RecyclerView.View
 
     @SuppressLint("CheckResult")
     private fun getAwayTeamBadge(teamName: String?) {
-        val apiServices = ApiClient.client.create(ApiInterface::class.java)
         apiServices.getTeams(teamName!!)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

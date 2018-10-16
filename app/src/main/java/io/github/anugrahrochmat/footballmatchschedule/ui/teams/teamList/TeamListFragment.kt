@@ -55,10 +55,9 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
         presenter.onViewAttached()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        super.onPrepareOptionsMenu(menu)
 
-        activity?.menuInflater?.inflate(R.menu.main_menu, menu)
         val mSearchMenuItem = menu?.findItem(R.id.searchMenu)
         val searchView = mSearchMenuItem?.actionView as SearchView
 
@@ -83,6 +82,12 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
                 return false
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        activity?.menuInflater?.inflate(R.menu.main_menu, menu)
     }
 
     override fun onDestroy() {

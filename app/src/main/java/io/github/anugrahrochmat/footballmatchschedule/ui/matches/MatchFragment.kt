@@ -28,14 +28,12 @@ class MatchFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-//        return super.onCreateView(inflater, container, savedInstanceState)
         return inflater!!.inflate(R.layout.fragment_match, container, false)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        super.onPrepareOptionsMenu(menu)
 
-        activity!!.menuInflater.inflate(R.menu.main_menu, menu)
         val searchMenuItem = menu?.findItem(R.id.searchMenu)
         val searchView = searchMenuItem?.actionView as SearchView
 
@@ -56,6 +54,12 @@ class MatchFragment: Fragment() {
                 return false
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        activity!!.menuInflater.inflate(R.menu.main_menu, menu)
     }
 
     private fun loadSearchFragment(searchQuery: String?){

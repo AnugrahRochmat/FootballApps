@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 class TeamPlayersPresenter(val view: TeamPlayersView) {
 
     private val TAG: String = TeamPlayersPresenter::class.java.simpleName
-    val apiServices = ApiClient.client.create(ApiInterface::class.java)
+    private val apiServices = ApiClient.client.create(ApiInterface::class.java)
 
     private var teamPlayersSubscription: Disposable? = null
 

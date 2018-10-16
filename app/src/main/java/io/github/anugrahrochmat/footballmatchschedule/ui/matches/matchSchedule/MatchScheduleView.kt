@@ -6,6 +6,5 @@ interface MatchScheduleView {
     fun showLoading()
     fun hideLoading()
     fun showSpinner(matchScheduleState: String)
-//    fun hideSpinner()
     fun showMatchSchedule(matches: List<MatchSchedule>)
 }

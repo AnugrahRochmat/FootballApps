@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 class MatchSearchPresenter(private val view: MatchSearchView) {
 
     private val TAG: String = MatchSearchPresenter::class.java.simpleName
-    val apiServices = ApiClient.client.create(ApiInterface::class.java)
+    private val apiServices = ApiClient.client.create(ApiInterface::class.java)
 
     private var matchSearchSubscription: Disposable? = null
 

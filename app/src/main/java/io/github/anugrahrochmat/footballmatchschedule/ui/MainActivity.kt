@@ -48,8 +48,6 @@ class MainActivity : AppCompatActivity() {
 //        initializerBuilder.enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
 //        // Initialize Stetho with the Initializer
 //        Stetho.initialize(initializerBuilder.build())
-
-
     }
 
     private fun loadMatchFragment(savedInstanceState: Bundle?){

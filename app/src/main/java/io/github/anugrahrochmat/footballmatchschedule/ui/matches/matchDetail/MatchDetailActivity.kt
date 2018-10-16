@@ -19,9 +19,8 @@ import io.github.anugrahrochmat.footballmatchschedule.data.models.Favourite
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchSchedule
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     private lateinit var presenter: MatchDetailPresenter
@@ -124,11 +123,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     }
 
     override fun showDateTime(match: MatchSchedule) {
-        val dateParsed = LocalDate.parse(match.dateEvent, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        val dateFormatted = dateParsed.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy"))
-        val timeParsed = LocalTime.parse(match.strTime, DateTimeFormatter.ISO_OFFSET_TIME)
-        val timeFormatted = timeParsed.plusHours(7).toString()
-        tv_date_time_detail.text = "${dateFormatted}  (${timeFormatted} WIB)"
+        val dateAndTimeFormatted: Date? = toGMTFormat(match.strDate!!, match.strTime!!)
+        tv_date_time_detail.text = dateAndTimeFormatted.toString()
+    }
+
+    private fun toGMTFormat (date: String, time: String): Date? {
+        val formatter = SimpleDateFormat ("dd/MM/yy HH:mm:ss")
+        formatter.timeZone = TimeZone.getTimeZone ("UTC")
+        val dateTime = "$date $time"
+        return formatter.parse(dateTime)
     }
 
     override fun showHeader(match: MatchSchedule){

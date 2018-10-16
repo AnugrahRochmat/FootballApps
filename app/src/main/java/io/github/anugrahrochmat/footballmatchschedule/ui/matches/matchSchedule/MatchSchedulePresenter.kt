@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 class MatchSchedulePresenter(private val view: MatchScheduleView){
 
     private val TAG: String = MatchSchedulePresenter::class.java.simpleName
-    val apiServices = ApiClient.client.create(ApiInterface::class.java)
+    private val apiServices = ApiClient.client.create(ApiInterface::class.java)
 
     private var matchScheduleSubscription: Disposable? = null
 
@@ -21,32 +21,11 @@ class MatchSchedulePresenter(private val view: MatchScheduleView){
         matchScheduleSubscription?.dispose()
     }
 
-    fun loadSearchFeature(searchText: String?){
-        matchScheduleSubscription = apiServices.getSearchMatch(searchText!!)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { view.showLoading() }
-                .subscribe(
-                        {
-                            view.hideLoading()
-                            view.showMatchSchedule(it.matchSchedules!!)
-                        },
-                        {
-                            error -> Log.e(TAG, error.message)
-                        }
-                )
-    }
-
-//    fun hideSpinnerFeature(){
-//        view.hideSpinner()
-//    }
-
     fun loadSpinnerFeature(scheduleState: String){
         view.showSpinner(scheduleState)
     }
 
     fun getMatchSchedule(scheduleState: String, leagueID: String){
-        val apiServices = ApiClient.client.create(ApiInterface::class.java)
         when (scheduleState) {
             MatchScheduleFragment.PREV -> apiServices.getPreviousSchedules(leagueID)
                     .subscribeOn(Schedulers.newThread())

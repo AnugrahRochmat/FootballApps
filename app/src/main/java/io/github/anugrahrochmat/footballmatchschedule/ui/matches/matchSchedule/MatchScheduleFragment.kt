@@ -58,36 +58,6 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
         presenter.onViewAttached()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//
-//        activity?.menuInflater?.inflate(R.menu.main_menu, menu)
-//        val mSearchMenuItem = menu?.findItem(R.id.searchMenu)
-//        val searchView = mSearchMenuItem?.actionView as SearchView
-//
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(searchText: String?): Boolean {
-//                presenter.hideSpinnerFeature()
-//                presenter.loadSearchFeature(searchText)
-//
-//                return true
-//            }
-//        })
-//
-//        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
-//            override fun onClose(): Boolean {
-//                presenter.getMatchSchedule(PREV, MainActivity.EXTRA_LEAGUE_SERIE_A)
-//                presenter.loadSpinnerFeature(MainActivity.EXTRA_LEAGUE_SERIE_A)
-//
-//                return false
-//            }
-//        })
-//    }
-
     override fun onDestroy() {
         super.onDestroy()
         presenter.onViewDestroyed()

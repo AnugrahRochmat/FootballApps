@@ -84,7 +84,7 @@ class MatchDetailPresenter(private val view: MatchDetailView) {
 
     fun insertFavorites(match: MatchSchedule, homeTeamBadge: String, awayTeamBadge: String) {
         doAsync {
-            val rowId = FavouriteDBHelper.insert(view.getContext(), match, homeTeamBadge, awayTeamBadge);
+            val rowId = FavouriteDBHelper.insert(view.getContext(), match, homeTeamBadge, awayTeamBadge)
             uiThread {
                 view.showFavoriteInserted(rowId)
             }
