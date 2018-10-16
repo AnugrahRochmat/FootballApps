@@ -2,10 +2,9 @@ package io.github.anugrahrochmat.footballmatchschedule.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.ui.favourites.tabLayoutFavourite.TabsFavouritesLayoutFragment
-import io.github.anugrahrochmat.footballmatchschedule.ui.matches.tabsLayoutMatches.TabsLayoutFragment
+import io.github.anugrahrochmat.footballmatchschedule.ui.matches.MatchFragment
 import io.github.anugrahrochmat.footballmatchschedule.ui.teams.teamList.TeamListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.btn_matches -> {
-                    loadTabLayoutMatch(savedInstanceState)
+                    loadMatchFragment(savedInstanceState)
                 }
                 R.id.btn_teams -> {
                     loadTeamListFragment(EXTRA_LEAGUE_SERIE_A)
@@ -53,30 +52,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-
-        // TODO create search feature
-
-        return true
-    }
-
-    private fun loadTabLayoutMatch(savedInstanceState: Bundle?){
+    private fun loadMatchFragment(savedInstanceState: Bundle?){
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_container, TabsLayoutFragment.newInstance(), TabsLayoutFragment::class.java.simpleName)
+                    .replace(R.id.main_container, MatchFragment.newInstance(), MatchFragment::class.java.simpleName)
                     .commit()
         }
     }
 
     private fun loadTeamListFragment(leagueId: String) {
-//        if (savedInstanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_container, TeamListFragment.newInstance(leagueId), TeamListFragment::class.java.simpleName)
-                    .commit()
-//        }
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_container, TeamListFragment.newInstance(leagueId), TeamListFragment::class.java.simpleName)
+                .commit()
     }
 
     private fun loadFavoritesFragment(savedInstanceState: Bundle?) {

@@ -9,5 +9,7 @@ interface TeamListView {
     fun showLoading()
     fun hideLoading()
     fun showSpinner()
+    fun hideSpinner()
     fun showTeamList(teams: List<Team>)
+    fun showNoSearchResult()
 }

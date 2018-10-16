@@ -24,8 +24,32 @@ class TeamListPresenter(private val view: TeamListView) {
         teamListSubscription?.dispose()
     }
 
+    fun loadSearchFeature(searchText: String?){
+        teamListSubscription = apiServices.getTeams(searchText!!)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { view.showLoading() }
+                .subscribe(
+                        {
+                            if (it.teams == null) {
+                                view.showNoSearchResult()
+                            } else {
+                                view.hideLoading()
+                                view.showTeamList(it.teams!!)
+                            }
+                        },
+                        {
+                            error -> Log.e(TAG, error.message)
+                        }
+                )
+    }
+
     fun loadSpinnerFeature(){
         view.showSpinner()
+    }
+
+    fun hideSpinnerFeature(){
+        view.hideSpinner()
     }
 
     fun getTeamList(idLeague: String) {

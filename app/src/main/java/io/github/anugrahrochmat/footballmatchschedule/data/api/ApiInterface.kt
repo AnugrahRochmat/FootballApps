@@ -1,8 +1,8 @@
 package io.github.anugrahrochmat.footballmatchschedule.data.api
 
-import io.github.anugrahrochmat.footballmatchschedule.data.models.Leagues
 import io.github.anugrahrochmat.footballmatchschedule.data.models.MatchScheduleResponse
 import io.github.anugrahrochmat.footballmatchschedule.data.models.PlayerResponse
+import io.github.anugrahrochmat.footballmatchschedule.data.models.SearchMatchResponse
 import io.github.anugrahrochmat.footballmatchschedule.data.models.TeamResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -19,8 +19,8 @@ interface ApiInterface {
     @GET("lookupevent.php")
     fun getMatchDetail(@Query("id") id: String): Observable<MatchScheduleResponse>
 
-    @GET("all_leagues.php")
-    fun getAllLeagues(@Query("id") id: String): Observable<Leagues>
+    @GET("searchevents.php?")
+    fun getSearchMatch(@Query("e") id: String): Observable<SearchMatchResponse>
 
     @GET("searchteams.php")
     fun getTeams(@Query("t") t: String): Observable<TeamResponse>

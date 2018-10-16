@@ -58,12 +58,43 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
         presenter.onViewAttached()
     }
 
+//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//
+//        activity?.menuInflater?.inflate(R.menu.main_menu, menu)
+//        val mSearchMenuItem = menu?.findItem(R.id.searchMenu)
+//        val searchView = mSearchMenuItem?.actionView as SearchView
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(searchText: String?): Boolean {
+//                presenter.hideSpinnerFeature()
+//                presenter.loadSearchFeature(searchText)
+//
+//                return true
+//            }
+//        })
+//
+//        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
+//            override fun onClose(): Boolean {
+//                presenter.getMatchSchedule(PREV, MainActivity.EXTRA_LEAGUE_SERIE_A)
+//                presenter.loadSpinnerFeature(MainActivity.EXTRA_LEAGUE_SERIE_A)
+//
+//                return false
+//            }
+//        })
+//    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.onViewDestroyed()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        setHasOptionsMenu(true)
         return createView(AnkoContext.create(ctx))
     }
 
@@ -98,7 +129,12 @@ class MatchScheduleFragment : Fragment(), MatchScheduleView, AnkoComponent<Conte
         }
     }
 
+//    override fun hideSpinner() {
+//        spinnerMatch.visibility = View.GONE
+//    }
+
     override fun showSpinner(matchScheduleState: String) {
+//        spinnerMatch.visibility = View.VISIBLE
         ArrayAdapter.createFromResource(context, R.array.leagues, R.layout.spinner_style
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears

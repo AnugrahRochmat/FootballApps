@@ -2,13 +2,12 @@ package io.github.anugrahrochmat.footballmatchschedule.ui.teams.teamList
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import io.github.anugrahrochmat.footballmatchschedule.R
 import io.github.anugrahrochmat.footballmatchschedule.data.models.Team
@@ -25,12 +24,14 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
     private lateinit var rvTeamListView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var spinnerTeam: Spinner
+    private lateinit var tvNoSearchResult: TextView
 
     companion object{
         const val rvTeamListID = 1
         const val progressBarID = 2
         const val rlItemContainer = 3
         const val spinnerID = 4
+        const val tvNoSearchResultID = 5
         private const val LEAGUE_ID = "LEAGUE_ID"
 
         fun newInstance(leagueId: String): TeamListFragment {
@@ -54,12 +55,43 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
         presenter.onViewAttached()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        activity?.menuInflater?.inflate(R.menu.main_menu, menu)
+        val mSearchMenuItem = menu?.findItem(R.id.searchMenu)
+        val searchView = mSearchMenuItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(searchText: String?): Boolean {
+                presenter.hideSpinnerFeature()
+                presenter.loadSearchFeature(searchText)
+
+                return true
+            }
+        })
+
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener{
+            override fun onClose(): Boolean {
+                presenter.getTeamList(MainActivity.EXTRA_LEAGUE_SERIE_A)
+                presenter.loadSpinnerFeature()
+
+                return false
+            }
+        })
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.onViewDestroyed()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return createView(AnkoContext.create(ctx))
     }
 
@@ -85,6 +117,17 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
                 below(spinnerID)
             }
 
+            tvNoSearchResult = textView {
+                id = tvNoSearchResultID
+                text = ctx.getString(R.string.search_result_empty)
+                textColor = Color.RED
+                textSize = 18f
+                padding = dip(16)
+                visibility = View.GONE
+            }.lparams {
+                centerInParent()
+            }
+
             rvTeamListView = recyclerView {
                 id = rvTeamListID
                 layoutManager = LinearLayoutManager(ctx)
@@ -103,6 +146,7 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
     }
 
     override fun showSpinner() {
+        spinnerTeam.visibility = View.VISIBLE
         ArrayAdapter.createFromResource(context, R.array.leagues, R.layout.spinner_style
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
@@ -135,6 +179,10 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
         }
     }
 
+    override fun hideSpinner() {
+        spinnerTeam.visibility = View.GONE
+    }
+
     override fun showTeamList(teams: List<Team>) {
         rvTeamListView.adapter = TeamListAdapter(teams) {
             val intent = Intent(context, TeamDetailActivity::class.java)
@@ -145,14 +193,22 @@ class TeamListFragment : Fragment(), TeamListView, AnkoComponent<Context> {
         adapter.notifyDataSetChanged()
     }
 
+    override fun showNoSearchResult(){
+        progressBar.visibility = View.GONE
+        rvTeamListView.visibility = View.GONE
+        tvNoSearchResult.visibility = View.VISIBLE
+    }
+
     override fun showLoading(){
         progressBar.visibility = View.VISIBLE
         rvTeamListView.visibility = View.GONE
+        tvNoSearchResult.visibility = View.GONE
     }
 
     override fun hideLoading(){
         progressBar.visibility = View.GONE
         rvTeamListView.visibility = View.VISIBLE
+        tvNoSearchResult.visibility = View.GONE
     }
 
 }

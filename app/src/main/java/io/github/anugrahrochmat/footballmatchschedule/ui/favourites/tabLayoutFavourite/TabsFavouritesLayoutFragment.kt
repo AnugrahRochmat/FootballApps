@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.anugrahrochmat.footballmatchschedule.R
-import kotlinx.android.synthetic.main.fragment_tabs_favourites_container.*
 import kotlinx.android.synthetic.main.fragment_tabs_favourites_container.view.*
 
 /**
@@ -21,8 +20,6 @@ class TabsFavouritesLayoutFragment: Fragment() {
         }
     }
 
-    // TODO Title Tab View Pager not Fucking Showing
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_tabs_favourites_container, container, false)
@@ -32,7 +29,7 @@ class TabsFavouritesLayoutFragment: Fragment() {
 
         // Set the adapter onto the view pager
         view.view_pager_favourites.adapter = adapter
-        view.tab_layout_favourites.setupWithViewPager(view_pager_favourites)
+        view.tab_layout_favourites.setupWithViewPager(view.view_pager_favourites)
 
         return view
     }
